@@ -1,0 +1,249 @@
+.drinks {
+  overflow: hidden;
+  background:
+    radial-gradient(80% 60% at 100% 0%, rgb(130 48 31 / 0.35), transparent 70%),
+    radial-gradient(70% 70% at 0% 100%, rgb(94 26 34 / 0.55), transparent 70%),
+    linear-gradient(180deg, var(--oxblood-950), #170609 50%, var(--oxblood-950));
+  border-block: 1px solid rgb(238 178 94 / 0.12);
+}
+
+.drinks__lights {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.drinks__inner {
+  position: relative;
+}
+
+.drinks__layout {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+@media (min-width: 64rem) {
+  .drinks__layout {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .drinks__nav {
+    position: sticky;
+    top: calc(var(--nav-h) + 2rem);
+  }
+}
+
+.drinks__nav .tabs--vertical .tabs__tab {
+  font-size: 1rem;
+}
+
+.drinks__panel {
+  min-height: 24rem;
+}
+
+.drinks__panel-head {
+  margin-bottom: 2rem;
+}
+
+.drinks__display {
+  font-size: clamp(3rem, 2rem + 5vw, 6.5rem);
+  font-style: italic;
+  line-height: 0.95;
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(245 201 126 / 0.75);
+  text-shadow: 0 0 60px rgb(238 178 94 / 0.25);
+}
+
+.drinks__intro {
+  margin-top: 0.75rem;
+  color: var(--text-soft);
+  font-size: 1.05rem;
+}
+
+/* ---------- Groups and items ---------- */
+
+.drink-group + .drink-group {
+  margin-top: 2.75rem;
+}
+
+.drink-group__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid rgb(238 178 94 / 0.35);
+}
+
+.drink-group__title {
+  font-size: 1.6rem;
+  font-style: italic;
+  color: var(--amber-200);
+}
+
+.drink-group__measures {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.drink-list {
+  display: grid;
+}
+
+.drink-group--split .drink-list {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3rem;
+}
+
+.drink {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.drink__text {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.drink__name {
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  line-height: 1.2;
+  color: var(--cream-50);
+}
+
+.drink__detail {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
+
+.drink__leader {
+  flex: 1;
+  min-width: 1rem;
+  align-self: flex-end;
+  margin-bottom: 0.45rem;
+  border-bottom: 1px dotted rgb(239 230 214 / 0.25);
+}
+
+.drink__prices {
+  flex: none;
+  color: var(--amber-200);
+  font-weight: 500;
+  font-size: 1.02rem;
+}
+
+.drink__prices--cols {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 4.25rem;
+  text-align: right;
+}
+
+.drink__prices--inline {
+  display: flex;
+  gap: 1rem;
+}
+
+.drink__prices--inline small {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.drink-group__note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  font-family: var(--font-display);
+  color: var(--text-soft);
+}
+
+/* ---------- Spirits ---------- */
+
+.drinks__spirits {
+  margin-top: 3.5rem;
+}
+
+@media (min-width: 64rem) {
+  .drinks__spirits {
+    margin-left: calc(15rem + 4rem);
+  }
+}
+
+.spirits {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-m);
+  background: rgb(11 8 6 / 0.35);
+  transition: border-color 0.3s;
+}
+
+.spirits.is-open {
+  border-color: rgb(238 178 94 / 0.5);
+}
+
+.spirits__heading {
+  font: inherit;
+}
+
+.spirits__toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  text-align: left;
+}
+
+.spirits__toggle .display {
+  font-size: 1.45rem;
+  font-style: italic;
+}
+
+.spirits__toggle:hover .display {
+  color: var(--amber-200);
+}
+
+.spirits__chevron {
+  width: 1.3rem;
+  height: 1.3rem;
+  color: var(--amber-300);
+  transition: transform 0.4s var(--ease-out);
+}
+
+.spirits.is-open .spirits__chevron {
+  transform: rotate(180deg);
+}
+
+.spirits__panel {
+  overflow: hidden;
+}
+
+.spirits__panel p {
+  padding: 0 1.4rem 1.3rem;
+  color: var(--text-soft);
+}
+
+@media (max-width: 40rem) {
+  .drink__name {
+    font-size: 1.15rem;
+  }
+
+  .drink__prices--cols {
+    grid-auto-columns: 3.4rem;
+  }
+}

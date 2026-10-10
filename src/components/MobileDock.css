@@ -1,0 +1,55 @@
+.dock {
+  position: fixed;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  z-index: 45;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.45rem;
+  border-radius: 999px;
+  background: rgb(22 16 12 / 0.86);
+  border: 1px solid var(--line-strong);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  box-shadow: var(--shadow-deep);
+}
+
+@media (min-width: 64rem) {
+  .dock {
+    display: none;
+  }
+}
+
+.dock__plan {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0 0.9rem 0 0.3rem;
+  border-radius: 999px;
+  color: var(--cream-50);
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.dock__plan-text .num {
+  margin-left: 0.3rem;
+  color: var(--amber-200);
+  font-weight: 500;
+}
+
+.dock__count {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--amber-400);
+  color: var(--ink-950);
+}
+
+.dock__book {
+  flex: 1;
+}

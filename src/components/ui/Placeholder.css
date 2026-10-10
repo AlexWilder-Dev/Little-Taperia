@@ -1,0 +1,104 @@
+.placeholder {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(60% 50% at var(--ph-x) var(--ph-y), rgb(238 178 94 / 0.32), transparent 70%),
+    radial-gradient(80% 70% at calc(100% - var(--ph-x)) 90%, rgb(94 26 34 / 0.65), transparent 70%),
+    linear-gradient(160deg, var(--ink-700), var(--ink-900) 70%);
+  filter: hue-rotate(var(--ph-hue));
+}
+
+.placeholder--art {
+  background: none;
+  filter: none;
+}
+
+.placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: var(--grain);
+  background-size: 180px;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+}
+
+/* Crop marks, like an empty frame on a contact sheet */
+.placeholder__marks {
+  position: absolute;
+  inset: 0.9rem;
+  z-index: 2;
+  pointer-events: none;
+  --mark: rgb(239 230 214 / 0.38);
+  background:
+    linear-gradient(var(--mark), var(--mark)) top left / 14px 1px,
+    linear-gradient(var(--mark), var(--mark)) top left / 1px 14px,
+    linear-gradient(var(--mark), var(--mark)) top right / 14px 1px,
+    linear-gradient(var(--mark), var(--mark)) top right / 1px 14px,
+    linear-gradient(var(--mark), var(--mark)) bottom left / 14px 1px,
+    linear-gradient(var(--mark), var(--mark)) bottom left / 1px 14px,
+    linear-gradient(var(--mark), var(--mark)) bottom right / 14px 1px,
+    linear-gradient(var(--mark), var(--mark)) bottom right / 1px 14px;
+  background-repeat: no-repeat;
+}
+
+.placeholder__tag {
+  position: absolute;
+  left: 1.4rem;
+  bottom: 1.4rem;
+  right: 1.4rem;
+  z-index: 3;
+  display: grid;
+  gap: 0.15rem;
+  justify-items: start;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--cream-200);
+  pointer-events: none;
+}
+
+.placeholder__kind {
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  color: var(--amber-300);
+}
+
+.placeholder__label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--cream-100);
+}
+
+.placeholder__file {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.66rem;
+  color: var(--cream-300);
+  overflow-wrap: anywhere;
+}
+
+.placeholder__tag--compact {
+  left: 1rem;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.placeholder__tag--compact .placeholder__label {
+  font-size: 0.9rem;
+}
+
+/* Artwork variant: the tag sits in a frosted chip so it reads over illustrations */
+.placeholder--art .placeholder__tag {
+  right: auto;
+  max-width: calc(100% - 2.8rem);
+  padding: 0.55rem 0.8rem;
+  border-radius: var(--radius-s);
+  background: rgb(11 8 6 / 0.72);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}

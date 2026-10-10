@@ -1,0 +1,58 @@
+.hours-badge {
+  --dot: var(--olive-300);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--cream-100);
+  white-space: nowrap;
+}
+
+.hours-badge--glass {
+  padding: 0.45rem 0.95rem 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgb(11 8 6 / 0.55);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+.hours-badge--closing-soon,
+.hours-badge--bar-only {
+  --dot: var(--amber-400);
+}
+
+.hours-badge--closed {
+  --dot: var(--cream-500);
+}
+
+.hours-badge__dot {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--dot);
+  flex: none;
+}
+
+.hours-badge--open .hours-badge__dot::after,
+.hours-badge--closing-soon .hours-badge__dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--dot);
+  animation: badge-pulse 2.4s var(--ease-out) infinite;
+}
+
+@keyframes badge-pulse {
+  from {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,17 @@
+.parallax {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.parallax__inner {
+  position: absolute;
+  inset: 0;
+}
+
+.parallax__inner > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

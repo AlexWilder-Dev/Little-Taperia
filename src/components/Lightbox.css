@@ -1,0 +1,72 @@
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: rgb(8 5 4 / 0.96);
+  backdrop-filter: blur(10px);
+  outline: none;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem var(--gutter);
+}
+
+.lightbox__count {
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--text-soft);
+}
+
+.lightbox__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding-inline: var(--gutter);
+  overflow: hidden;
+}
+
+.lightbox__figure {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+  max-width: 100%;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.lightbox__figure:active {
+  cursor: grabbing;
+}
+
+.lightbox__photo {
+  width: min(90vw, calc(78vh * var(--ratio, 1.5)));
+  max-height: 78vh;
+  border-radius: var(--radius-s);
+  box-shadow: var(--shadow-deep);
+}
+
+.lightbox__photo .photo__img {
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.lightbox__figure figcaption {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.lightbox__nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}

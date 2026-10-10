@@ -1,0 +1,228 @@
+.story__track {
+  margin-top: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+.story__stage {
+  display: none;
+}
+
+.story-visual {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-deep);
+  background: var(--ink-850);
+}
+
+.story-visual__photo,
+.story-visual__placeholder {
+  position: absolute;
+  inset: 0;
+}
+
+.chapter {
+  display: grid;
+  gap: 2rem;
+  padding-block: 2rem 3.5rem;
+}
+
+.chapter__kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--amber-300);
+}
+
+.chapter__kicker .num {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid rgb(238 178 94 / 0.45);
+  letter-spacing: 0.05em;
+}
+
+.chapter__title {
+  margin-top: 1.1rem;
+  font-size: var(--step-3);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.chapter__body {
+  margin-top: 1.4rem;
+  font-size: 1.07rem;
+}
+
+/* ---------- Founders ---------- */
+
+.founders {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 40rem) {
+  .founders {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.founder {
+  padding: 1.5rem 1.4rem 1.6rem;
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-deep);
+}
+
+.founder__role {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oxblood-700);
+}
+
+.founder__name {
+  margin-top: 0.4rem;
+  font-size: 1.65rem;
+  line-height: 1.05;
+  font-style: italic;
+  color: var(--ink-950);
+}
+
+.founder__bio {
+  margin-top: 0.75rem;
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: #3b2e25;
+}
+
+/* ---------- Rooms ---------- */
+
+.rooms {
+  display: grid;
+  gap: 1.25rem;
+  margin: 2rem 0 0;
+}
+
+.rooms__item {
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.rooms__item dt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.9rem;
+}
+
+.rooms__spanish {
+  font-size: 1.7rem;
+  font-style: italic;
+  color: var(--cream-50);
+}
+
+.rooms__name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber-300);
+}
+
+.rooms__item dd {
+  margin: 0.4rem 0 0;
+}
+
+/* ---------- Desktop: sticky stage with chapters scrolling past ---------- */
+
+@media (min-width: 64rem) {
+  .story__track {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(3rem, 6vw, 6rem);
+  }
+
+  .story__stage {
+    display: block;
+    position: sticky;
+    top: calc(var(--nav-h) + 2rem);
+    align-self: start;
+    height: calc(100vh - var(--nav-h) - 4rem);
+    max-height: 52rem;
+  }
+
+  .story__frame {
+    position: relative;
+    height: 100%;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-deep);
+    background: var(--ink-850);
+  }
+
+  .story-visual--stage {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .story__progress {
+    position: absolute;
+    top: 8%;
+    bottom: 8%;
+    right: -1.75rem;
+    width: 1px;
+    background: var(--line);
+  }
+
+  .story__progress-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--amber-300), var(--amber-500));
+    transform-origin: top;
+  }
+
+  .story__tick {
+    position: absolute;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    translate: -50% -50%;
+    background: var(--ink-900);
+    border: 1px solid var(--line-strong);
+    transition:
+      background-color 0.4s,
+      border-color 0.4s,
+      box-shadow 0.4s;
+  }
+
+  .story__tick.is-on {
+    background: var(--amber-400);
+    border-color: var(--amber-400);
+    box-shadow: 0 0 12px var(--amber-400);
+  }
+
+  .chapter__visual-inline {
+    display: none;
+  }
+
+  .chapter {
+    min-height: 82vh;
+    align-content: start;
+    padding-block: 3rem 6rem;
+  }
+}
