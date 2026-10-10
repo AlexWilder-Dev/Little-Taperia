@@ -73,7 +73,7 @@ export function useDialog(open: boolean, ref: RefObject<HTMLElement | null>, onC
     return () => {
       document.removeEventListener('keydown', onKeyDown);
       unlockPage();
-      // The opener may have gone (e.g. the last plate was cleared); fall back to the main content
+      // The opener may have unmounted while the dialog was open; fall back to the main content
       const target = previous?.isConnected ? previous : document.getElementById('main');
       target?.focus({ preventScroll: true });
     };
