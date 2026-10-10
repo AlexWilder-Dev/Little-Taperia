@@ -12,8 +12,6 @@ export interface Award {
   title: string;
   org: string;
   year?: number;
-  /** Image id in the brand assets, when the badge image is available. */
-  badge?: string;
 }
 
 export const quotes: PressQuote[] = [
@@ -50,14 +48,10 @@ export const awards: Award[] = [
     title: 'Love London Award winner',
     org: 'Time Out',
     year: 2016,
-    badge: 'badge-love-london-2016',
   },
   { id: 'time-out-stars', title: '★★★★ review', org: 'Time Out' },
   { id: 'independent-stars', title: '★★★★ review', org: 'The Independent' },
 ];
-
-/** Additional badge image with no stated award text. */
-export const extraBadges = [{ id: 'badge-sticker-2017', alt: '2017 award sticker' }];
 
 export const mentions: string[] = [
   'Featured in Time Out’s and Hot Dinners’ best London tapas round-ups',

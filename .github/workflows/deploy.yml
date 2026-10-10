@@ -29,11 +29,11 @@ jobs:
 
       - run: npm test
 
-      # Downloads and converts the venue's photos unless processed ones are
-      # already committed. Never fails the build: anything it can't fetch
-      # shows as a labelled placeholder.
+      # Downloads and converts every photo, including the full-size opening
+      # photo and the gallery. --strict stops the deploy if any download
+      # fails, so the live site never goes out without its photos.
       - name: Fetch and process photos
-        run: npm run images -- --if-missing
+        run: npm run images -- --strict
 
       - id: pages
         uses: actions/configure-pages@v6

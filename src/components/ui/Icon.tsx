@@ -75,12 +75,6 @@ const paths = {
       <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" />
     </>
   ),
-  candle: (
-    <>
-      <path d="M12 3c1.6 1.8 2 3.1 2 4a2 2 0 01-4 0c0-.9.4-2.2 2-4z" />
-      <path d="M9 11h6v10H9z" />
-    </>
-  ),
 } as const;
 
 export type IconName = keyof typeof paths;

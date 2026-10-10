@@ -3,17 +3,16 @@
  *
  * `npm run images` downloads these into images-src/, converts them to
  * responsive AVIF/WebP in public/images/ and records their real dimensions in
- * src/data/image-manifest.json. Components read the manifest, so a photo only
- * shows once it has been processed; until then its slot shows a labelled
- * placeholder.
+ * src/data/image-manifest.json. Components read the manifest: a section shows
+ * a photo once it has been processed, and simply goes without one otherwise.
  *
  * Newer photos dropped into public/images/ig/ are processed too and preferred
- * over these 2015 site photos (see `tag:` candidates below and the gallery).
+ * over the 2015 site photos (see `tag:` candidates below and the gallery).
  * Tag them with an optional public/images/ig/captions.json:
  *   { "bar-at-night.jpg": { "alt": "The marble bar at night", "tags": ["interior", "bar"] } }
  *
- * Alt text and tags for files with camera-style names are generic until the
- * photos can be reviewed.
+ * Alt text for files with camera-style names stays generic until someone has
+ * looked at the photos.
  */
 
 export type PhotoTag = 'interior' | 'bar' | 'shopfront' | 'dish' | 'seafood' | 'drink' | 'people';
@@ -22,6 +21,15 @@ export interface PhotoSource {
   id: string;
   file: string;
   url: string;
+  alt: string;
+  tags: PhotoTag[];
+}
+
+/** A crop of another photo, cut by the image script. Box is [x, y, width, height] as fractions. */
+export interface PhotoCrop {
+  id: string;
+  from: string;
+  box: [number, number, number, number];
   alt: string;
   tags: PhotoTag[];
 }
@@ -47,6 +55,13 @@ const gallery = (id: string, file: string, alt = generic, tags: PhotoTag[] = [])
 });
 
 export const photoSources: PhotoSource[] = [
+  {
+    id: 'hero',
+    file: 'IMG_0003par.jpg',
+    url: `${SITE}/wp-content/uploads/2020/06/IMG_0003par.jpg`,
+    alt: 'The front-room bar: a white marble bar top on reclaimed timber, shelves of wine and spirits under copper pendant lamps, and longhorn horns above a sage-green shuttered mirror',
+    tags: ['interior', 'bar'],
+  },
   gallery('entry', 'taperia-entry.jpg', 'The entrance to The Little Taperia on Tooting High Street', ['shopfront']),
   gallery('taperia-2015', 'The-Little-Taperia-2015-1-WEB.jpg', 'The Little Taperia', ['interior']),
   gallery('pulpo-a-feira', 'taperia-pulpofeira.jpg', 'Pulpo a feira — Galician-style octopus', ['dish', 'seafood']),
@@ -70,13 +85,32 @@ export const photoSources: PhotoSource[] = [
   gallery('cqp5pyhw', 'CQP5PyhWcAA5hS7.jpg'),
 ];
 
-export const brandSources: BrandSource[] = [
+/** Details of the opening photo, used where a section wants a closer look at one material. */
+export const photoCrops: PhotoCrop[] = [
   {
-    id: 'logo',
-    file: 'taperia-logo1.png',
-    url: `${SITE}/wp-content/uploads/2015/10/taperia-logo1.png`,
-    alt: 'The Little Taperia',
+    id: 'crop-front-bar',
+    from: 'hero',
+    box: [0, 0.555, 0.53, 0.445],
+    alt: 'The front of the bar: marble top, reclaimed timber planks with brass hooks and bentwood stools',
+    tags: ['bar'],
   },
+  {
+    id: 'crop-back-bar',
+    from: 'hero',
+    box: [0.143, 0.138, 0.673, 0.513],
+    alt: 'The back bar: rustic shelves of wine and spirits either side of the shuttered mirror, under the longhorn horns',
+    tags: ['bar', 'drink'],
+  },
+  {
+    id: 'crop-timber',
+    from: 'hero',
+    box: [0.33, 0.737, 0.67, 0.184],
+    alt: '',
+    tags: [],
+  },
+];
+
+export const brandSources: BrandSource[] = [
   {
     id: 'badge-love-london-2016',
     file: '156px_London-winner-2016.png',
@@ -84,52 +118,38 @@ export const brandSources: BrandSource[] = [
     alt: 'Time Out Love London Awards 2016 winner',
   },
   {
-    id: 'badge-sticker-2017',
+    id: 'badge-hardens-2017',
     file: 'Sticker-2017-115x150.png',
     url: `${SITE}/wp-content/uploads/2020/06/Sticker-2017-115x150.png`,
-    alt: '2017 award sticker',
+    alt: 'Listed in Harden’s 2017',
   },
 ];
 
 export interface PhotoSlot {
-  /** What the slot should show, used for placeholder labels. */
-  label: string;
   /**
    * Photo ids in order of preference. `tag:<name>` matches any processed photo
    * with that tag, newer Instagram photos first.
    */
   candidates: string[];
-  /** Smallest original width that still looks sharp at the slot's largest size. */
+  /** Smallest original width worth showing here. Photos are never shown larger than their pixels. */
   minWidth: number;
   /** Minimum width ÷ height, for slots that need a landscape frame. */
   minAspect?: number;
 }
 
 export const slots = {
-  hero: {
-    label: 'Interior by candlelight',
-    candidates: ['tag:interior', 'tag:bar', 'taperia-2015', 'entry'],
-    minWidth: 1600,
-    minAspect: 1.2,
-  },
-  shopfront: {
-    label: 'The shopfront, once a pet shop',
-    candidates: ['tag:shopfront', 'entry'],
-    minWidth: 900,
-  },
-  rooms: {
-    label: 'The front and back rooms',
-    candidates: ['tag:bar', 'tag:interior', 'taperia-2015'],
-    minWidth: 900,
-  },
-  seafood: {
-    label: 'From the kitchen',
-    candidates: ['tag:seafood', 'pulpo-a-feira', 'chipiron-relleno'],
-    minWidth: 700,
-  },
+  hero: { candidates: ['hero'], minWidth: 1200, minAspect: 1.4 },
+  shopfront: { candidates: ['tag:shopfront', 'entry'], minWidth: 600 },
+  frontBar: { candidates: ['crop-front-bar'], minWidth: 500 },
+  backBar: { candidates: ['crop-back-bar'], minWidth: 600 },
+  seafood: { candidates: ['tag:seafood', 'pulpo-a-feira', 'chipiron-relleno'], minWidth: 600 },
+  timber: { candidates: ['crop-timber'], minWidth: 800 },
 } satisfies Record<string, PhotoSlot>;
 
 export type SlotName = keyof typeof slots;
+
+/** The opening photo and its crops appear in their own sections, not the gallery. */
+export const galleryExclude = ['hero', ...photoCrops.map((crop) => crop.id)];
 
 /** Gallery size tiers, by original width. Photos below `min` are left out. */
 export const galleryTiers = { feature: 1600, standard: 720, min: 480 };

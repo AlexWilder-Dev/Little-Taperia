@@ -4,8 +4,7 @@
   z-index: 100;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background: rgb(8 5 4 / 0.96);
-  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--page) 97%, transparent);
   outline: none;
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -18,9 +17,9 @@
 }
 
 .lightbox__count {
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  color: var(--text-soft);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
 }
 
 .lightbox__stage {
@@ -35,7 +34,7 @@
 .lightbox__figure {
   display: grid;
   justify-items: center;
-  gap: 0.9rem;
+  gap: 0.8rem;
   max-width: 100%;
   cursor: grab;
   touch-action: pan-y;
@@ -46,10 +45,10 @@
 }
 
 .lightbox__photo {
-  width: min(90vw, calc(78vh * var(--ratio, 1.5)));
-  max-height: 78vh;
+  width: min(90vw, calc(76vh * var(--ratio, 1.5)));
+  max-height: 76vh;
   border-radius: var(--radius-s);
-  box-shadow: var(--shadow-deep);
+  box-shadow: var(--shadow-card);
 }
 
 .lightbox__photo .photo__img {
@@ -58,9 +57,7 @@
 }
 
 .lightbox__figure figcaption {
-  font-family: var(--font-display);
-  font-style: italic;
-  color: var(--text-soft);
+  color: var(--ink-soft);
   text-align: center;
 }
 

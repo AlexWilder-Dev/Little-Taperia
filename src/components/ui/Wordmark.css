@@ -1,66 +1,18 @@
 .wordmark {
-  display: inline-flex;
-  flex-direction: column;
-  line-height: 1;
+  display: inline-block;
   margin: 0;
-  font-weight: inherit;
-}
-
-.wordmark__small {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.32em;
-  font-size: 0.56rem;
-  color: var(--amber-300);
-  padding-left: 0.1em;
-}
-
-.wordmark__big {
   font-family: var(--font-display);
   font-style: italic;
-  font-weight: 500;
-  font-size: 1.65rem;
-  letter-spacing: -0.01em;
-  margin-top: 0.05em;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--gold);
 }
 
-.wordmark--hero .wordmark__small {
-  font-size: clamp(0.8rem, 0.6rem + 0.8vw, 1.15rem);
-  letter-spacing: 0.5em;
+.wordmark--small {
+  font-size: clamp(1.55rem, 1.3rem + 0.8vw, 1.95rem);
 }
 
-.wordmark--hero .wordmark__big {
-  font-size: clamp(5rem, 1rem + 17vw, 15rem);
-  line-height: 0.82;
-  margin-top: 0.08em;
-  margin-left: -0.04em;
-  letter-spacing: -0.035em;
-  background: linear-gradient(180deg, var(--cream-50) 30%, var(--amber-200) 95%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: none;
-  filter: drop-shadow(0 10px 40px rgb(238 178 94 / 0.25));
-  padding-right: 0.08em;
-}
-
-.wordmark__logo {
-  display: block;
-  background: linear-gradient(180deg, var(--cream-50), var(--amber-200));
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: left center;
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: left center;
-}
-
-.wordmark--small .wordmark__logo {
-  height: 2.6rem;
-}
-
-.wordmark--hero .wordmark__logo {
-  width: min(42rem, 82vw);
-  filter: drop-shadow(0 10px 40px rgb(238 178 94 / 0.25));
+.wordmark--large {
+  font-size: clamp(2.4rem, 1.6rem + 3.4vw, 4rem);
 }

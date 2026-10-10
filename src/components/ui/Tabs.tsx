@@ -1,6 +1,4 @@
-import { motion } from 'framer-motion';
 import { useRef, type KeyboardEvent } from 'react';
-import { snappy } from '../../lib/motion';
 import './Tabs.css';
 
 export interface TabItem {
@@ -76,9 +74,6 @@ export function Tabs({
             className="tabs__tab"
             onClick={() => onChange(item.id)}
           >
-            {selected && (
-              <motion.span layoutId={`${idPrefix}-indicator`} className="tabs__indicator" transition={snappy} />
-            )}
             <span className="tabs__label">{item.label}</span>
           </button>
         );

@@ -1,11 +1,10 @@
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { venue } from '../data/venue';
-import { spring } from '../lib/motion';
+import { hasGallery } from '../lib/images';
 import { useDialog } from '../lib/useDialog';
 import { HoursBadge } from './ui/HoursBadge';
 import { Icon } from './ui/Icon';
-import { Magnetic } from './ui/Magnetic';
 import { Portal } from './ui/Portal';
 import { Wordmark } from './ui/Wordmark';
 import './Nav.css';
@@ -17,7 +16,7 @@ export const navLinks = [
   { id: 'gallery', label: 'Gallery' },
   { id: 'book', label: 'Book' },
   { id: 'visit', label: 'Visit' },
-];
+].filter((link) => link.id !== 'gallery' || hasGallery);
 
 function useActiveSection(ids: string[]) {
   const [active, setActive] = useState<string | null>(null);
@@ -37,22 +36,20 @@ function useActiveSection(ids: string[]) {
   return active;
 }
 
-const sectionIds = navLinks.map((link) => link.id);
+// 'top' clears the highlight while the hero is in view
+const sectionIds = ['top', ...navLinks.map((link) => link.id)];
 
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const active = useActiveSection(sectionIds);
-  const { scrollY } = useScroll();
   const panelRef = useRef<HTMLDivElement>(null);
 
-  useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 40));
   useDialog(open, panelRef, () => setOpen(false));
 
   return (
-    <header className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
+    <header className="nav">
       <div className="nav__inner container">
-        <a href="#top" className="nav__brand" aria-label="The Little Taperia, back to top">
+        <a href="#top" className="nav__brand">
           <Wordmark />
         </a>
 
@@ -74,11 +71,9 @@ export function Nav() {
 
         <div className="nav__actions">
           <HoursBadge className="nav__badge" />
-          <Magnetic className="nav__cta">
-            <a href="#book" className="btn btn--primary btn--small">
-              Book a table
-            </a>
-          </Magnetic>
+          <a href="#book" className="btn btn--primary btn--small nav__cta">
+            Book a table
+          </a>
           <button
             type="button"
             className="nav__toggle icon-btn"
@@ -116,18 +111,12 @@ export function Nav() {
               </div>
               <nav className="mobile-menu__nav container" aria-label="Sections">
                 <ul role="list">
-                  {navLinks.map((link, i) => (
-                    <motion.li
-                      key={link.id}
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ ...spring, delay: 0.05 + i * 0.04 }}
-                    >
+                  {navLinks.map((link) => (
+                    <li key={link.id}>
                       <a href={`#${link.id}`} className="mobile-menu__link display" onClick={() => setOpen(false)}>
-                        <span className="mobile-menu__index num">0{i + 1}</span>
                         {link.label}
                       </a>
-                    </motion.li>
+                    </li>
                   ))}
                 </ul>
               </nav>

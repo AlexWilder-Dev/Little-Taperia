@@ -1,7 +1,6 @@
 import { MotionConfig } from 'framer-motion';
 import { Book } from './components/book/Book';
 import { Drinks } from './components/Drinks';
-import { CandleGlow } from './components/effects/CandleGlow';
 import { Footer } from './components/Footer';
 import { Gallery } from './components/Gallery';
 import { Hero } from './components/Hero';
@@ -21,27 +20,23 @@ export function App() {
     <MotionConfig reducedMotion="user" transition={spring}>
       <NowProvider>
         <PlanProvider>
-          <div className="app">
-            <a className="skip-link" href="#main">
-              Skip to content
-            </a>
-            <CandleGlow />
-            <Nav />
-            <main id="main" tabIndex={-1}>
-              <Hero />
-              <PressStrip />
-              <Story />
-              <TapasMenu />
-              <Drinks />
-              <Gallery />
-              <Book />
-              <Visit />
-            </main>
-            <Footer />
-            <PlanTray />
-            <MobileDock />
-            <div className="film" aria-hidden="true" />
-          </div>
+          <a className="skip-link" href="#main">
+            Skip to content
+          </a>
+          <Nav />
+          <main id="main" tabIndex={-1}>
+            <Hero />
+            <PressStrip />
+            <Story />
+            <TapasMenu />
+            <Drinks />
+            <Gallery />
+            <Book />
+            <Visit />
+          </main>
+          <Footer />
+          <PlanTray />
+          <MobileDock />
         </PlanProvider>
       </NowProvider>
     </MotionConfig>

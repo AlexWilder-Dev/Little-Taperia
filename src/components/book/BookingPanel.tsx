@@ -155,7 +155,7 @@ export function BookingPanel() {
                   label: (
                     <>
                       <span className="date-strip__weekday">{d.relative === 'Today' ? 'Today' : d.weekday}</span>
-                      <span className="date-strip__day display num">{d.dayOfMonth}</span>
+                      <span className="date-strip__day num">{d.dayOfMonth}</span>
                       <span className="date-strip__month">{d.month}</span>
                     </>
                   ),
@@ -213,7 +213,7 @@ export function BookingPanel() {
           <motion.div
             key="result"
             ref={focusResult}
-            className="booking__result marble"
+            className="booking__result"
             tabIndex={-1}
             role="region"
             aria-labelledby="booking-result-title"
@@ -252,7 +252,7 @@ export function BookingPanel() {
                   <Icon name="mail" /> Write the email
                 </a>
               )}
-              <a href={`tel:${venue.phone.tel}`} className="btn btn--outline-dark">
+              <a href={`tel:${venue.phone.tel}`} className="btn">
                 <Icon name="phone" /> {venue.phone.display}
               </a>
             </div>

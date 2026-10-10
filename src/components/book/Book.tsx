@@ -12,7 +12,6 @@ export function Book() {
       <div className="container">
         <SectionHeading
           id="book-title"
-          number="06"
           eyebrow="Reservas"
           title={
             <>
@@ -65,7 +64,7 @@ export function Book() {
                 </div>
               </li>
               <li>
-                <Icon name="candle" />
+                <Icon name="clock" />
                 <div>
                   <h3>Good to know</h3>
                   <p>Last food orders are taken an hour before closing. {venue.serviceNote}</p>

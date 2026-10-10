@@ -3,7 +3,6 @@ import { formatClock, kitchenClose } from '../lib/hours';
 import { useLondonNow } from '../lib/now';
 import { HoursBadge } from './ui/HoursBadge';
 import { Icon } from './ui/Icon';
-import { Magnetic } from './ui/Magnetic';
 import { Reveal } from './ui/Reveal';
 import { SectionHeading } from './ui/SectionHeading';
 import './Visit.css';
@@ -13,13 +12,9 @@ export function Visit() {
 
   return (
     <section id="visit" className="section visit" aria-labelledby="visit-title">
-      <p className="visit__ghost display" aria-hidden="true">
-        SW17
-      </p>
       <div className="container visit__inner">
         <SectionHeading
           id="visit-title"
-          number="07"
           eyebrow="Visítanos"
           title={
             <>
@@ -40,12 +35,10 @@ export function Visit() {
               <Icon name="pin" /> {venue.address.directionsNote} — a short walk from the Northern line station.
             </p>
             <div className="visit__actions">
-              <Magnetic>
-                <a href={venue.mapsUrl} className="btn btn--primary" target="_blank" rel="noopener noreferrer">
-                  Get directions <Icon name="arrowUpRight" />
-                  <span className="visually-hidden">(opens Google Maps in a new tab)</span>
-                </a>
-              </Magnetic>
+              <a href={venue.mapsUrl} className="btn btn--primary" target="_blank" rel="noopener noreferrer">
+                Get directions <Icon name="arrowUpRight" />
+                <span className="visually-hidden">(opens Google Maps in a new tab)</span>
+              </a>
               <a href={`tel:${venue.phone.tel}`} className="btn">
                 <Icon name="phone" /> {venue.phone.display}
               </a>
@@ -55,10 +48,10 @@ export function Visit() {
             </div>
           </Reveal>
 
-          <Reveal className="visit__hours marble" delay={0.1}>
+          <Reveal className="visit__hours" delay={0.1}>
             <div className="visit__hours-head">
               <h3 className="display">Opening hours</h3>
-              <HoursBadge tone="plain" className="visit__badge" />
+              <HoursBadge className="visit__badge" />
             </div>
             <table className="hours-table">
               <caption className="visually-hidden">Opening hours and last food orders, each day</caption>

@@ -5,35 +5,32 @@
   z-index: 45;
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.5rem 1.25rem 0.5rem 0.5rem;
+  gap: 0.8rem;
+  padding: 0.45rem 1.2rem 0.45rem 0.45rem;
   border-radius: 999px;
-  background: rgb(29 22 17 / 0.88);
-  border: 1px solid rgb(238 178 94 / 0.45);
-  backdrop-filter: blur(14px);
-  box-shadow:
-    var(--shadow-deep),
-    0 0 40px -12px rgb(238 178 94 / 0.6);
-  color: var(--cream-50);
-  font-weight: 600;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-card);
+  color: var(--ink);
+  font-weight: 650;
 }
 
 .tray-launcher:hover {
-  border-color: var(--amber-300);
+  border-color: var(--copper);
 }
 
 .tray-launcher__count {
   display: grid;
   place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2.3rem;
+  height: 2.3rem;
   border-radius: 50%;
-  background: var(--amber-400);
-  color: var(--ink-950);
+  background: var(--copper);
+  color: var(--ink-deep);
 }
 
 .tray-launcher__total {
-  color: var(--amber-200);
+  color: var(--ink-soft);
   font-weight: 500;
 }
 
@@ -41,8 +38,7 @@
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgb(5 3 2 / 0.6);
-  backdrop-filter: blur(4px);
+  background: rgb(55 27 11 / 0.35);
 }
 
 .tray {
@@ -54,13 +50,12 @@
   display: flex;
   flex-direction: column;
   max-height: min(88vh, 52rem);
-  border-radius: var(--radius-l) var(--radius-l) 0 0;
-  background:
-    radial-gradient(90% 50% at 100% 0%, rgb(238 178 94 / 0.12), transparent 70%),
-    linear-gradient(180deg, var(--ink-800), var(--ink-900));
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
+  background: var(--surface);
+  color: var(--ink);
   border: 1px solid var(--line-strong);
   border-bottom: 0;
-  box-shadow: 0 -30px 80px -20px rgb(0 0 0 / 0.8);
+  box-shadow: 0 -20px 50px -20px rgb(55 27 11 / 0.45);
   outline: none;
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -71,8 +66,12 @@
     right: 1.5rem;
     bottom: 1.5rem;
     width: 27rem;
-    border-radius: var(--radius-l);
+    border-radius: var(--radius-m);
     border-bottom: 1px solid var(--line-strong);
+  }
+
+  .tray__grip {
+    display: none;
   }
 }
 
@@ -80,12 +79,6 @@
   padding-top: 0.7rem;
   touch-action: none;
   cursor: grab;
-}
-
-@media (min-width: 64rem) {
-  .tray__grip {
-    display: none;
-  }
 }
 
 .tray__handle {
@@ -102,21 +95,20 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.1rem 1.5rem 1rem;
+  padding: 1rem 1.5rem 0.9rem;
   border-bottom: 1px solid var(--line);
 }
 
 .tray__title {
-  margin-top: 0.35rem;
+  margin-top: 0.25rem;
   font-size: 2.1rem;
-  font-style: italic;
 }
 
 .tray__scroll {
   flex: 1;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 1.25rem 1.5rem;
+  padding: 1.2rem 1.5rem;
 }
 
 .tray__guests {
@@ -130,25 +122,25 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 600;
+  font-weight: 650;
 }
 
 .tray__guests-label svg {
   width: 1.2rem;
   height: 1.2rem;
-  color: var(--amber-300);
+  color: var(--link);
 }
 
 .tray__suggestion {
   margin-top: 1rem;
-  font-size: 0.88rem;
-  color: var(--text-soft);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
 }
 
 .tray__meter {
-  height: 3px;
+  height: 4px;
   margin-bottom: 0.6rem;
-  border-radius: 3px;
+  border-radius: 4px;
   background: var(--line);
   overflow: hidden;
 }
@@ -156,25 +148,24 @@
 .tray__meter-fill {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, var(--olive-400), var(--amber-400));
+  background: var(--sage);
   transform-origin: left;
 }
 
 .tray__empty {
-  margin-top: 1.5rem;
-  padding: 1.25rem;
+  margin-top: 1.4rem;
+  padding: 1.1rem;
   border: 1px dashed var(--line-strong);
   border-radius: var(--radius-m);
-  color: var(--text-soft);
-  font-size: 0.92rem;
+  color: var(--ink-soft);
 }
 
 .tray__empty strong {
-  color: var(--amber-300);
+  color: var(--link);
 }
 
 .tray__lines {
-  margin-top: 1.25rem;
+  margin-top: 1.2rem;
   display: grid;
 }
 
@@ -185,7 +176,7 @@
     'main total'
     'qty qty';
   gap: 0.5rem 1rem;
-  padding-block: 0.9rem;
+  padding-block: 0.85rem;
   border-top: 1px solid var(--line);
 }
 
@@ -202,13 +193,13 @@
 }
 
 .tray__line-name {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   line-height: 1.2;
 }
 
 .tray__line-each {
-  font-size: 0.8rem;
-  color: var(--text-faint);
+  font-size: 0.85rem;
+  color: var(--ink-faint);
 }
 
 .tray__line-qty {
@@ -231,35 +222,34 @@
 .tray__line-qty .num {
   min-width: 1.4rem;
   text-align: center;
-  font-weight: 600;
+  font-weight: 650;
 }
 
 .tray__line-total {
   grid-area: total;
   text-align: right;
   min-width: 4.5rem;
-  color: var(--amber-200);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .tray__footer {
-  padding: 1rem 1.5rem 1.25rem;
+  padding: 1rem 1.5rem 1.2rem;
   border-top: 1px solid var(--line);
-  background: rgb(11 8 6 / 0.35);
+  background: var(--page);
 }
 
 .tray__sums {
   display: grid;
   gap: 0.3rem;
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 0.97rem;
 }
 
 .tray__sums div {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  color: var(--text-soft);
+  color: var(--ink-soft);
 }
 
 .tray__sums dd {
@@ -267,21 +257,16 @@
 }
 
 .tray__sums dt span {
-  color: var(--text-faint);
-  font-size: 0.82em;
+  font-size: 0.85em;
 }
 
 .tray__sums .tray__grand {
   margin-top: 0.4rem;
   padding-top: 0.6rem;
-  border-top: 1px solid var(--line);
-  color: var(--cream-50);
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink);
   font-size: 1.15rem;
-  font-weight: 600;
-}
-
-.tray__grand dd {
-  color: var(--amber-200);
+  font-weight: 700;
 }
 
 .tray__note {
@@ -291,10 +276,10 @@
   margin-top: 0.9rem;
   padding: 0.6rem 0.8rem;
   border-radius: var(--radius-s);
-  background: rgb(108 106 61 / 0.18);
-  color: var(--olive-300);
-  font-size: 0.85rem;
-  font-weight: 500;
+  background: color-mix(in srgb, var(--sage) 14%, transparent);
+  color: var(--sage);
+  font-weight: 650;
+  font-size: 0.93rem;
 }
 
 .tray__note svg {
@@ -308,9 +293,4 @@
   justify-content: flex-end;
   gap: 0.6rem;
   margin-top: 1rem;
-}
-
-.tray__actions .btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
 }

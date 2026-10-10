@@ -181,7 +181,7 @@ export function PrivateHire() {
                 }
               }}
               type="submit"
-              className="btn btn--cream"
+              className="btn btn--primary"
             >
               Send enquiry <Icon name="arrowRight" />
             </button>
@@ -197,7 +197,7 @@ export function PrivateHire() {
               el.focus();
             }
           }}
-          className="booking__result marble"
+          className="booking__result"
           tabIndex={-1}
           role="region"
           aria-labelledby="hire-result-title"
@@ -224,7 +224,7 @@ export function PrivateHire() {
             <a href={enquiryEmail(fields)} className="btn btn--dark">
               <Icon name="mail" /> Open as an email
             </a>
-            <a href={`tel:${venue.phone.tel}`} className="btn btn--outline-dark">
+            <a href={`tel:${venue.phone.tel}`} className="btn">
               <Icon name="phone" /> {venue.phone.display}
             </a>
           </div>

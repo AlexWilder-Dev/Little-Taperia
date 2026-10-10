@@ -1,154 +1,108 @@
 .hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  align-items: flex-end;
+  padding-bottom: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+/* Never wider than the photo's own 1360px, and short enough to leave the intro in view */
+.hero__frame {
+  position: relative;
+  width: 100%;
+  max-width: 85rem;
+  max-height: max(24rem, calc(100svh - var(--nav-h) - 10rem));
+  margin-inline: auto;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
-  padding-top: calc(var(--nav-h) + 4rem);
-  padding-bottom: clamp(4.5rem, 9vh, 7.5rem);
+  background: var(--wall);
 }
 
 .hero__media {
   position: absolute;
-  inset: 0 0 -12%;
-  z-index: 0;
+  inset: -12% 0 0;
 }
 
-.hero__photo,
-.hero__placeholder {
-  position: absolute;
-  inset: 0;
-}
-
-.hero__photo .photo__img {
-  transform-origin: 62% 42%;
-  animation: ken-burns 34s ease-in-out infinite alternate;
-}
-
-@keyframes ken-burns {
-  from {
-    transform: scale(1.04) translate3d(0, 0, 0);
-  }
-  to {
-    transform: scale(1.17) translate3d(-2.2%, -1.6%, 0);
-  }
-}
-
-.hero__placeholder .placeholder__marks {
-  display: none;
-}
-
-.hero__placeholder .placeholder__tag {
-  top: calc(var(--nav-h) + 1rem);
-  bottom: auto;
-  left: auto;
-  right: var(--gutter);
-}
-
-.hero__lights {
-  position: absolute;
-  inset: 0;
+.hero__photo {
   width: 100%;
   height: 100%;
 }
 
-.hero__shade {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(
-      180deg,
-      rgb(11 8 6 / 0.6) 0%,
-      transparent 22%,
-      transparent 42%,
-      rgb(11 8 6 / 0.75) 74%,
-      var(--ink-950) 92%
-    ),
-    linear-gradient(90deg, rgb(11 8 6 / 0.7) 0%, rgb(11 8 6 / 0.25) 45%, transparent 70%);
+.hero__photo .photo__img {
+  object-position: 48% 60%;
 }
 
-.hero--art .hero__shade {
-  background:
-    linear-gradient(
-      180deg,
-      rgb(11 8 6 / 0.5) 0%,
-      transparent 20%,
-      transparent 55%,
-      rgb(11 8 6 / 0.55) 80%,
-      var(--ink-950) 94%
-    ),
-    linear-gradient(90deg, rgb(11 8 6 / 0.65) 0%, rgb(11 8 6 / 0.2) 50%, transparent 72%);
+.hero__row {
+  display: grid;
+  gap: 2rem;
+  margin-top: clamp(-6.5rem, -5vw, -2rem);
 }
 
-.hero__content {
+.hero__row--plain {
+  margin-top: clamp(2rem, 1rem + 4vw, 4rem);
+}
+
+@media (min-width: 64rem) {
+  .hero__row {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: 4rem;
+    align-items: end;
+  }
+}
+
+.hero__intro {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   display: grid;
   justify-items: start;
-  gap: 1.4rem;
+  gap: 1rem;
+  padding: clamp(1.5rem, 1rem + 2.5vw, 2.75rem);
+  background: var(--surface);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-card);
 }
 
-.hero__eyebrow {
-  margin-bottom: -0.25rem;
-}
-
-.hero__tagline {
-  font-family: var(--font-display);
-  font-size: var(--step-2);
-  font-weight: 400;
-  line-height: 1.2;
-  max-width: 24ch;
-  color: var(--cream-100);
+.hero__title {
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  line-height: 1.05;
+  color: var(--ink);
   text-wrap: balance;
+}
+
+.hero__where {
+  color: var(--ink-soft);
 }
 
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.6rem;
   margin-top: 0.4rem;
 }
 
-.hero__scroll {
-  position: absolute;
-  z-index: 2;
-  right: var(--gutter);
-  bottom: 2.5rem;
-  display: none;
-  width: 2.75rem;
-  height: 5rem;
-  place-items: center;
+.hero__badge {
+  margin-top: 0.2rem;
 }
 
-.hero__scroll-line {
-  position: relative;
-  width: 1px;
-  height: 100%;
-  background: var(--line-strong);
-  overflow: hidden;
+.hero__welcome {
+  display: grid;
+  gap: 0.9rem;
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--ink-soft);
 }
 
-.hero__scroll-line::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: -40%;
-  width: 1px;
-  height: 40%;
-  background: var(--amber-300);
-  animation: scroll-cue 2.2s var(--ease-out) infinite;
+.hero__founders {
+  font-size: var(--step-0);
+  color: var(--ink-faint);
 }
 
-@keyframes scroll-cue {
-  to {
-    top: 100%;
+@media (max-width: 48rem) {
+  .hero__frame {
+    aspect-ratio: 4 / 5;
+    max-height: 72svh;
   }
 }
 
-@media (min-width: 48rem) {
-  .hero__scroll {
-    display: grid;
+@media (min-width: 85rem) {
+  .hero__frame {
+    border-radius: 0 0 var(--radius-m) var(--radius-m);
   }
 }

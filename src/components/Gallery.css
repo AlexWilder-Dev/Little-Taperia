@@ -8,8 +8,8 @@
 
 .gallery__grid {
   columns: 2;
-  column-gap: 0.6rem;
-  margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+  column-gap: 0.75rem;
+  margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
 }
 
 @media (min-width: 48rem) {
@@ -19,17 +19,18 @@
   }
 }
 
-/* Masonry tiles keep each photo's own proportions, so nothing is upscaled to fill a frame */
+/* Each photo keeps its own proportions and is never shown larger than its pixels */
 .tile {
   position: relative;
   display: block;
   width: 100%;
+  max-width: var(--max);
   aspect-ratio: var(--ratio, 1);
-  margin-bottom: 0.6rem;
+  margin: 0 auto 0.75rem;
   break-inside: avoid;
   border-radius: var(--radius-m);
   overflow: hidden;
-  background: var(--ink-850);
+  background: var(--wall);
 }
 
 @media (min-width: 48rem) {
@@ -44,8 +45,7 @@
 }
 
 .tile__button,
-.tile__photo,
-.tile__placeholder {
+.tile__photo {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -62,63 +62,12 @@
   outline-offset: -3px;
 }
 
-.tile__photo .photo__img {
-  transition:
-    opacity 0.9s var(--ease-out),
-    transform 1.2s var(--ease-out);
-}
-
-.tile__button:hover .photo__img,
-.tile__button:focus-visible .photo__img {
-  transform: scale(1.05);
-}
-
-.tile__caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  padding: 2.5rem 1rem 0.9rem;
-  text-align: left;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--cream-50);
-  background: linear-gradient(180deg, transparent, rgb(11 8 6 / 0.85));
-  opacity: 0;
-  transform: translateY(8px);
-  transition:
-    opacity 0.4s var(--ease-out),
-    transform 0.5s var(--ease-out);
-}
-
-.tile__button:hover .tile__caption,
-.tile__button:focus-visible .tile__caption {
-  opacity: 1;
-  transform: none;
-}
-
-.tile::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px var(--line);
-  pointer-events: none;
-  transition: box-shadow 0.4s;
-}
-
-.tile:hover::after {
-  box-shadow:
-    inset 0 0 0 1px rgb(238 178 94 / 0.55),
-    inset 0 0 60px -20px rgb(238 178 94 / 0.4);
+.tile__button:hover .photo__img {
+  opacity: 0.9;
 }
 
 .gallery__credit {
-  margin-top: 1.5rem;
-  font-size: 0.85rem;
-  color: var(--text-faint);
-  font-style: italic;
-  font-family: var(--font-display);
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--ink-faint);
 }

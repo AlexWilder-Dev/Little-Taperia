@@ -26,23 +26,35 @@ One-off setup: in the repository go to **Settings → Pages** and set **Source**
 
 The workflow passes the Pages URL to the build as `SITE_URL`, so the Open Graph tags get absolute links. For other hosts, set it yourself: `SITE_URL=https://example.com/taperia/ npm run build`.
 
+## Design
+
+The look is taken from the venue's opening photo of the front-room bar (`IMG_0003par.jpg`): white marble on reclaimed timber, copper pendants, sage shutters, white brick and the chalkboard.
+
+- **Palette:** every colour in `src/styles/tokens.css` is sampled from that photo by `npm run palette` (`scripts/palette.ts`), alongside their existing brand gold (#BD9C68) and burgundy (#432A2E). A few roles mix two sampled colours where a raw sample can't meet AA contrast as text.
+- **Type:** the wordmark is set in IM Fell English Italic, the closest match to their gold logo. Headings use IM Fell English, body text Source Sans 3, and Amatic SC (after the chalkboard lettering) appears only on the drinks board.
+- **Materials:** marble-white cards, the drinks list as a chalkboard panel, copper buttons and links, and real crops of the photo (the back bar, the front of the bar, a strip of its timber planks).
+- **Motion:** a gentle parallax on the opening photo, as on their current site, and soft reveals as sections scroll in. Nothing else moves on its own.
+
 ## Photos
 
-The venue's own photos are fetched and prepared by one command:
+Photos are fetched and prepared by one command:
 
 ```bash
 npm run images              # download anything missing, then process
 npm run images -- --offline # only process what's already in images-src/
 npm run images -- --refresh # download everything again
+npm run images -- --strict  # fail if any download fails (used by the deploy)
 ```
 
-It downloads the logo, award badges and gallery photos listed in `src/data/photos.ts` into `images-src/` (git-ignored), then:
+It downloads the opening photo, the gallery photos and the award badges listed in `src/data/photos.ts` into `images-src/` (git-ignored), then:
 
-- reads each photo's real dimensions and generates AVIF and WebP at 480–2560px, **never larger than the original**;
-- applies one shared warm grade so the 2015 photos sit together (film grain is added in CSS);
+- converts each photo as it is (no grading or effects) to AVIF and WebP at 480–2560px, **never larger than the original**;
+- cuts the crops of the opening photo listed in `photoCrops`;
 - writes `src/data/image-manifest.json`, which the site reads.
 
-Each photo slot (hero, shopfront, rooms, seafood) lists its candidate photos and a minimum width in `src/data/photos.ts`. A slot only uses a photo that's sharp enough for it; otherwise that section falls back to its own artwork. Photos under 480px wide are left out of the gallery. The script prints a table of sizes and which photo landed in each slot.
+A photo whose original can't be fetched keeps its committed version. Sections without a suitable photo simply go without one, and the gallery (and its nav link) only appears when there are gallery photos.
+
+Each photo slot in `src/data/photos.ts` lists its candidate photos and a minimum width, and every photo is displayed no larger than its own pixels.
 
 **Newer photos:** drop images into `public/images/ig/` and run `npm run images`. They are preferred over the 2015 photos and appear first in the gallery. To place them in sections, tag them in `public/images/ig/captions.json`:
 
@@ -52,19 +64,19 @@ Each photo slot (hero, shopfront, rooms, seafood) lists its candidate photos and
 
 Tags: `interior`, `bar`, `shopfront`, `dish`, `seafood`, `drink`, `people`.
 
-**If a download fails**, the slot shows a labelled placeholder naming the missing file, and the rest of the site works as normal. The deploy workflow runs `npm run images -- --if-missing` on GitHub's runners, so the live demo gets the photos even if they were never committed; once processed photos are committed, CI leaves them alone.
+**On deploy** the workflow runs `npm run images -- --strict` on GitHub's runners, which downloads every photo at full size. If any download fails, the deploy stops and the previous version stays live.
 
 ## Editing content
 
 All content lives in typed data files:
 
-| File | What's in it |
-| --- | --- |
-| `src/data/venue.ts` | Address, phone, email, opening hours, founders, rooms, booking link, notices |
-| `src/data/menu.ts` | Tapas sections, dishes, prices and allergens |
-| `src/data/drinks.ts` | Drinks tabs, measures and prices |
-| `src/data/press.ts` | Review quotes, awards, mentions |
-| `src/data/photos.ts` | Photo sources, alt text, slots |
+| File                 | What's in it                                                                 |
+| -------------------- | ---------------------------------------------------------------------------- |
+| `src/data/venue.ts`  | Address, phone, email, opening hours, founders, rooms, booking link, notices |
+| `src/data/menu.ts`   | Tapas sections, dishes, prices and allergens                                 |
+| `src/data/drinks.ts` | Drinks tabs, measures and prices                                             |
+| `src/data/press.ts`  | Review quotes, awards, mentions                                              |
+| `src/data/photos.ts` | Photo sources, alt text, slots                                               |
 
 Prices are plain numbers, as on the printed menu. Opening hours drive the live open/closed badge, the hours table and the booking time slots, all in Europe/London time.
 
@@ -76,4 +88,4 @@ Prices are plain numbers, as on the printed menu. Opening hours drive the live o
 
 ## Stack
 
-Vite, React, TypeScript and Framer Motion, with plain CSS. Fonts are self-hosted from Fontsource: Bodoni Moda for display and Instrument Sans for body text. Motion respects `prefers-reduced-motion`.
+Vite, React, TypeScript and Framer Motion, with plain CSS. Fonts are self-hosted from Fontsource. Motion respects `prefers-reduced-motion`.

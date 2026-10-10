@@ -19,3 +19,6 @@ export const getBrand = (id: string): BrandEntry | undefined => manifest.brand[i
 export const slotPhotos = resolveSlots(manifest);
 
 export const galleryItems = () => resolveGallery(manifest);
+
+/** The gallery section and its nav link only appear when there are photos to show. */
+export const hasGallery = galleryItems().length > 0;

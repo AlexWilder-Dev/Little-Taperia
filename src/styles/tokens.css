@@ -1,73 +1,53 @@
 :root {
-  /* Warm near-black, from the candlelit room */
-  --ink-950: #0b0806;
-  --ink-900: #110c09;
-  --ink-850: #16100c;
-  --ink-800: #1d1611;
-  --ink-700: #2a2019;
-  --ink-600: #3a2d24;
+  /*
+   * Sampled from the opening photo of the front-room bar (IMG_0003par.jpg)
+   * by scripts/palette.ts — run `npm run palette` to reproduce.
+   */
+  --brick: #e2d2c5; /* white-painted brick, lit */
+  --marble: #e7d5cc; /* marble bar top, brightest */
+  --wall: #b39d91; /* cream wall, lit */
+  --oak: #5c361d; /* reclaimed oak bar front, median */
+  --oak-light: #805132; /* bar front planks in light */
+  --oak-dark: #371b0b; /* bar front planks in shadow */
+  --copper: #b6795a; /* copper dome pendants */
+  --brass: #c9a77f; /* brass hooks on the bar front */
+  --sage: #575942; /* shuttered mirror frame */
+  --board: #514b4a; /* chalkboard, between the lettering */
+  --chalk: #a6a19f; /* white chalk lettering */
+  --chalk-pink: #a58181; /* pink chalk lettering */
+  --chalk-red: #71504f; /* red chalk lettering */
 
-  /* Marble cream, for type and surfaces */
-  --cream-50: #f8f2e8;
-  --cream-100: #efe6d6;
-  --cream-200: #e2d6c2;
-  --cream-300: #cdbfa9;
-  --cream-500: #a09380;
+  /* Their existing brand colours: logo gold and header burgundy */
+  --gold: #bd9c68;
+  --burgundy: #432a2e;
 
-  /* Sherry and oxblood */
-  --oxblood-950: #1c070a;
-  --oxblood-900: #2b0b10;
-  --oxblood-800: #431219;
-  --oxblood-700: #5e1a22;
-  --sherry-600: #82301f;
-  --sherry-500: #a4462a;
+  /* Roles. Mixes only where a sampled colour alone can't meet AA contrast. */
+  --page: var(--brick);
+  --surface: color-mix(in srgb, var(--marble) 45%, #fff); /* marble-white cards */
+  --ink: var(--oak-dark);
+  --ink-soft: var(--oak);
+  --ink-faint: var(--oak-light);
+  --ink-deep: color-mix(in srgb, var(--oak-dark) 70%, #000); /* text on copper */
+  --link: color-mix(in srgb, var(--copper) 55%, var(--oak-dark)); /* copper you can read */
+  --line: color-mix(in srgb, var(--oak) 22%, transparent);
+  --line-strong: color-mix(in srgb, var(--oak) 45%, transparent);
 
-  /* Saffron-amber candlelight */
-  --amber-200: #f9dca6;
-  --amber-300: #f5c97e;
-  --amber-400: #eeb25e;
-  --amber-500: #e0993d;
-  --amber-600: #b8772a;
+  --font-display: 'IM Fell English', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-chalk: 'Amatic SC', 'Arial Narrow', sans-serif;
+  --font-body: 'Source Sans 3 Variable', 'Source Sans Pro', ui-sans-serif, system-ui, sans-serif;
 
-  /* A touch of olive */
-  --olive-300: #c3c08a;
-  --olive-400: #a8a56b;
-  --olive-600: #6c6a3d;
-  --olive-800: #33321d;
-
-  --text: var(--cream-100);
-  --text-soft: var(--cream-300);
-  --text-faint: var(--cream-500);
-  --accent: var(--amber-400);
-  --line: rgb(239 230 214 / 0.12);
-  --line-strong: rgb(239 230 214 / 0.26);
-  --surface: rgb(29 22 17 / 0.72);
-  --surface-solid: var(--ink-800);
-
-  --font-display: 'Bodoni Moda Variable', 'Bodoni 72', Didot, 'Times New Roman', serif;
-  --font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-
-  --step--1: clamp(0.8rem, 0.78rem + 0.1vw, 0.86rem);
-  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.08rem);
-  --step-1: clamp(1.2rem, 1.1rem + 0.45vw, 1.45rem);
-  --step-2: clamp(1.45rem, 1.25rem + 0.9vw, 2.1rem);
-  --step-3: clamp(1.9rem, 1.5rem + 1.9vw, 3.2rem);
-  --step-4: clamp(2.6rem, 1.8rem + 4vw, 5.6rem);
-  --step-5: clamp(3.6rem, 2rem + 8vw, 9.5rem);
+  --step--1: clamp(0.85rem, 0.82rem + 0.1vw, 0.9rem);
+  --step-0: clamp(1.03rem, 1rem + 0.15vw, 1.1rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
+  --step-2: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);
+  --step-3: clamp(2rem, 1.6rem + 1.8vw, 3rem);
+  --step-4: clamp(2.6rem, 1.9rem + 3.2vw, 4.4rem);
 
   --gutter: clamp(1rem, 0.6rem + 2.4vw, 3rem);
-  --maxw: 84rem;
+  --maxw: 85rem;
   --nav-h: 4.5rem;
-  --radius-s: 4px;
-  --radius-m: 10px;
-  --radius-l: 20px;
+  --radius-s: 3px;
+  --radius-m: 6px;
+  --shadow-card: 0 1px 2px rgb(55 27 11 / 0.08), 0 12px 32px -16px rgb(55 27 11 / 0.35);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --shadow-deep: 0 30px 80px -20px rgb(0 0 0 / 0.75), 0 8px 24px -8px rgb(0 0 0 / 0.5);
-  --glow-amber: 0 0 0 1px rgb(238 178 94 / 0.35), 0 10px 40px -10px rgb(238 178 94 / 0.55);
-
-  /* Fine film grain, tiled */
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 1.4 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-
-  /* Soft marble veining for cream cards */
-  --marble: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Cfilter%20id='m'%3E%3CfeTurbulence%20type='turbulence'%20baseFrequency='0.004%200.012'%20numOctaves='5'%20seed='7'/%3E%3CfeColorMatrix%20type='luminanceToAlpha'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='table'%20tableValues='1%200.4%200.08%200%200%200%200%200%200%200'/%3E%3C/feComponentTransfer%3E%3CfeColorMatrix%20values='0%200%200%200%200.4%200%200%200%200%200.33%200%200%200%200%200.26%200%200%200%200.75%200'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23m)'/%3E%3C/svg%3E");
 }

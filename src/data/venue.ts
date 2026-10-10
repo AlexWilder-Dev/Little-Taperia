@@ -28,7 +28,7 @@ export const venue = {
   name: 'The Little Taperia',
   tagline: 'Spanish tapas, sherry & cocktails on Tooting High Street',
   description:
-    'An independent tapas bar on Tooting High Street, bringing a little Iberian glamour to SW17: inventive tapas, really good ingredients and a candlelit room to linger in.',
+    'An independent tapas bar on Tooting High Street, bringing a little Iberian glamour to SW17: inventive tapas, really good ingredients and gorgeous surroundings to linger in.',
   website: 'https://www.thelittletaperia.co.uk/',
 
   address: {

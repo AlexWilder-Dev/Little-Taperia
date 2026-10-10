@@ -1,58 +1,41 @@
 .hours-badge {
-  --dot: var(--olive-300);
+  --dot: var(--sage);
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--cream-100);
-  white-space: nowrap;
+  gap: 0.55rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink-soft);
 }
 
 .hours-badge--glass {
-  padding: 0.45rem 0.95rem 0.45rem 0.8rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.7rem;
   border-radius: 999px;
-  background: rgb(11 8 6 / 0.55);
-  border: 1px solid var(--line);
-  backdrop-filter: blur(10px);
+  border: 1px solid var(--line-strong);
 }
 
 .hours-badge--closing-soon,
 .hours-badge--bar-only {
-  --dot: var(--amber-400);
+  --dot: var(--copper);
 }
 
 .hours-badge--closed {
-  --dot: var(--cream-500);
+  --dot: var(--oak-light);
 }
 
 .hours-badge__dot {
-  position: relative;
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.55rem;
+  height: 0.55rem;
   border-radius: 50%;
   background: var(--dot);
   flex: none;
 }
 
-.hours-badge--open .hours-badge__dot::after,
-.hours-badge--closing-soon .hours-badge__dot::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 1px solid var(--dot);
-  animation: badge-pulse 2.4s var(--ease-out) infinite;
+.nav .hours-badge {
+  color: var(--brick);
+  border-color: color-mix(in srgb, var(--brick) 35%, transparent);
 }
 
-@keyframes badge-pulse {
-  from {
-    transform: scale(0.6);
-    opacity: 0.9;
-  }
-  to {
-    transform: scale(1.8);
-    opacity: 0;
-  }
+.nav .hours-badge--open {
+  --dot: color-mix(in srgb, var(--sage) 55%, #fff);
 }

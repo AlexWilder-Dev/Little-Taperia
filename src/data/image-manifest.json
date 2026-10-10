@@ -1,5 +1,78 @@
 {
-  "generatedAt": null,
-  "photos": {},
+  "generatedAt": "2026-10-10T13:37:04.682Z",
+  "photos": {
+    "hero": {
+      "id": "hero",
+      "origin": "site",
+      "w": 1360,
+      "h": 760,
+      "widths": [
+        480,
+        768,
+        1080,
+        1360
+      ],
+      "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAABwAwCdASoYAA0APu1mq04ppaQiMAgBMB2JQBYdg6+zmimDj4AAydje1QoSsWXpx1rYFqWnnHIfu+e+Bv5VgXKM76ccosFOYAA=",
+      "color": "#987868",
+      "alt": "The front-room bar: a white marble bar top on reclaimed timber, shelves of wine and spirits under copper pendant lamps, and longhorn horns above a sage-green shuttered mirror",
+      "tags": [
+        "interior",
+        "bar"
+      ],
+      "order": 0
+    },
+    "crop-front-bar": {
+      "id": "crop-front-bar",
+      "origin": "site",
+      "w": 721,
+      "h": 338,
+      "widths": [
+        480,
+        721
+      ],
+      "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAwCdASoYAAsAPu1kqk2ppaQiMAgBMB2JYwCdMoACE0ZDnDMxpZMAAP0v+Z5UK7d5LzrpYyPAS8mq7Dm/PNvza0SHCzLIAAA=",
+      "color": "#583828",
+      "alt": "The front of the bar: marble top, reclaimed timber planks with brass hooks and bentwood stools",
+      "tags": [
+        "bar"
+      ],
+      "order": 1000
+    },
+    "crop-back-bar": {
+      "id": "crop-back-bar",
+      "origin": "site",
+      "w": 915,
+      "h": 390,
+      "widths": [
+        480,
+        768,
+        915
+      ],
+      "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAABQAwCdASoYAAoAPu1Ct1apoqakGAEwHYljALDsDWJqaNJ4AAD9OE757PP0JYC4g8sGyd6RebjOfUhTfsgM8hGwscAAAA==",
+      "color": "#a88878",
+      "alt": "The back bar: rustic shelves of wine and spirits either side of the shuttered mirror, under the longhorn horns",
+      "tags": [
+        "bar",
+        "drink"
+      ],
+      "order": 1001
+    },
+    "crop-timber": {
+      "id": "crop-timber",
+      "origin": "site",
+      "w": 911,
+      "h": 140,
+      "widths": [
+        480,
+        768,
+        911
+      ],
+      "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAwCdASoYAAQAPu1kqU2ppaQiMAgBMB2JQBOmUI7gBvKRo8FIAAD+6uwFeu6XAOHLxiE2Uhb29RgG8GCREAAA",
+      "color": "#784828",
+      "alt": "",
+      "tags": [],
+      "order": 1002
+    }
+  },
   "brand": {}
 }

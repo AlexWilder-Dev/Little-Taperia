@@ -3,19 +3,16 @@ import { Reveal } from './Reveal';
 
 interface SectionHeadingProps {
   id: string;
-  number: string;
   eyebrow: string;
   title: ReactNode;
   children?: ReactNode;
   align?: 'start' | 'center';
 }
 
-export function SectionHeading({ id, number, eyebrow, title, children, align = 'start' }: SectionHeadingProps) {
+export function SectionHeading({ id, eyebrow, title, children, align = 'start' }: SectionHeadingProps) {
   return (
     <Reveal className={`section-heading section-heading--${align}`}>
-      <p className="eyebrow">
-        <span className="num">{number}</span> {eyebrow}
-      </p>
+      <p className="eyebrow">{eyebrow}</p>
       <h2 id={id} className="section-heading__title display">
         {title}
       </h2>

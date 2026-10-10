@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState, type CSSProperties } from 'react';
+import { useState } from 'react';
 import { allergens, menu, type Allergen } from '../../data/menu';
 import { venue } from '../../data/venue';
 import { slotPhotos } from '../../lib/images';
@@ -7,9 +7,7 @@ import { softSpring } from '../../lib/motion';
 import { usePlan } from '../../lib/plan';
 import { plural } from '../../lib/format';
 import { Icon } from '../ui/Icon';
-import { Parallax } from '../ui/Parallax';
 import { Photo } from '../ui/Photo';
-import { PhotoPlaceholder } from '../ui/Placeholder';
 import { Reveal } from '../ui/Reveal';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Tabs, panelId, tabId } from '../ui/Tabs';
@@ -25,29 +23,19 @@ const PHOTO_SECTION = 'mariscos';
 
 function SectionPhoto() {
   const slot = slotPhotos.seafood;
-  if (slot.kind === 'photo') {
-    return (
-      <figure className="menu__photo">
-        <div
-          className="menu__photo-img"
-          style={{ '--ratio': Math.min(1.6, Math.max(0.8, slot.image.w / slot.image.h)) } as CSSProperties}
-        >
-          <Parallax>
-            <Photo image={slot.image} sizes="(min-width: 64rem) 28vw, 90vw" />
-          </Parallax>
-        </div>
-        <figcaption>{slot.image.alt}</figcaption>
-      </figure>
-    );
-  }
-  if (slot.kind === 'missing') {
-    return (
-      <div className="menu__photo">
-        <PhotoPlaceholder label={slot.label} files={slot.files} className="menu__photo-img" />
-      </div>
-    );
-  }
-  return null;
+  if (slot.kind !== 'photo') return null;
+  return (
+    <figure className="menu__photo">
+      <Photo
+        image={slot.image}
+        sizes="(min-width: 64rem) 28vw, 90vw"
+        className="frame"
+        noUpscale
+        style={{ aspectRatio: `${slot.image.w} / ${slot.image.h}` }}
+      />
+      <figcaption className="caption">{slot.image.alt}</figcaption>
+    </figure>
+  );
 }
 
 export function TapasMenu() {
@@ -65,12 +53,11 @@ export function TapasMenu() {
     : '';
 
   return (
-    <section id="menu" className="section menu" aria-labelledby="menu-title">
+    <section id="menu" className="section section--surface menu" aria-labelledby="menu-title">
       <div className="container">
         <div className="menu__head">
           <SectionHeading
             id="menu-title"
-            number="03"
             eyebrow="La carta"
             title={
               <>
