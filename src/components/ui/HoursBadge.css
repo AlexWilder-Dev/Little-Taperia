@@ -3,13 +3,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: var(--ink-soft);
+  color: inherit;
 }
 
-.hours-badge--glass {
-  padding: 0.35rem 0.85rem 0.35rem 0.7rem;
+.hours-badge--pill {
+  padding: 0.35rem 0.9rem 0.35rem 0.75rem;
   border-radius: 999px;
   border: 1px solid var(--line-strong);
 }
@@ -28,14 +28,6 @@
   height: 0.55rem;
   border-radius: 50%;
   background: var(--dot);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--dot) 22%, transparent);
   flex: none;
-}
-
-.nav .hours-badge {
-  color: var(--brick);
-  border-color: color-mix(in srgb, var(--brick) 35%, transparent);
-}
-
-.nav .hours-badge--open {
-  --dot: color-mix(in srgb, var(--sage) 55%, #fff);
 }

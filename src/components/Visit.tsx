@@ -4,7 +4,6 @@ import { useLondonNow } from '../lib/now';
 import { HoursBadge } from './ui/HoursBadge';
 import { Icon } from './ui/Icon';
 import { Reveal } from './ui/Reveal';
-import { SectionHeading } from './ui/SectionHeading';
 import './Visit.css';
 
 export function Visit() {
@@ -13,18 +12,11 @@ export function Visit() {
   return (
     <section id="visit" className="section visit" aria-labelledby="visit-title">
       <div className="container visit__inner">
-        <SectionHeading
-          id="visit-title"
-          eyebrow="Visítanos"
-          title={
-            <>
-              Find <em>us</em>
-            </>
-          }
-        />
-
         <div className="visit__layout">
           <Reveal className="visit__where">
+            <h2 id="visit-title" className="eyebrow visit__title">
+              Find us
+            </h2>
             <address className="visit__address">
               <span className="visit__street display">{venue.address.street}</span>
               <span className="visit__city">
@@ -39,10 +31,10 @@ export function Visit() {
                 Get directions <Icon name="arrowUpRight" />
                 <span className="visually-hidden">(opens Google Maps in a new tab)</span>
               </a>
-              <a href={`tel:${venue.phone.tel}`} className="btn">
+              <a href={`tel:${venue.phone.tel}`} className="btn btn--light">
                 <Icon name="phone" /> {venue.phone.display}
               </a>
-              <a href={`mailto:${venue.email}`} className="btn visit__email">
+              <a href={`mailto:${venue.email}`} className="btn btn--light visit__email">
                 <Icon name="mail" /> {venue.email}
               </a>
             </div>

@@ -95,18 +95,11 @@ export const photoCrops: PhotoCrop[] = [
     tags: ['bar'],
   },
   {
-    id: 'crop-back-bar',
+    id: 'crop-shelf',
     from: 'hero',
-    box: [0.143, 0.138, 0.673, 0.513],
-    alt: 'The back bar: rustic shelves of wine and spirits either side of the shuttered mirror, under the longhorn horns',
+    box: [0.585, 0, 0.24, 0.66],
+    alt: 'Shelves of gin, wine and glasses behind the bar, under cut-glass pendant lamps',
     tags: ['bar', 'drink'],
-  },
-  {
-    id: 'crop-timber',
-    from: 'hero',
-    box: [0.33, 0.737, 0.67, 0.184],
-    alt: '',
-    tags: [],
   },
 ];
 
@@ -141,9 +134,8 @@ export const slots = {
   hero: { candidates: ['hero'], minWidth: 1200, minAspect: 1.4 },
   shopfront: { candidates: ['tag:shopfront', 'entry'], minWidth: 600 },
   frontBar: { candidates: ['crop-front-bar'], minWidth: 500 },
-  backBar: { candidates: ['crop-back-bar'], minWidth: 600 },
+  shelf: { candidates: ['crop-shelf'], minWidth: 300 },
   seafood: { candidates: ['tag:seafood', 'pulpo-a-feira', 'chipiron-relleno'], minWidth: 600 },
-  timber: { candidates: ['crop-timber'], minWidth: 800 },
 } satisfies Record<string, PhotoSlot>;
 
 export type SlotName = keyof typeof slots;

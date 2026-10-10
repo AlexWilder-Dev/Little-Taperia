@@ -9,12 +9,9 @@ export const allergens: { id: Allergen; label: string }[] = [
 ];
 
 export interface DishOption {
-  /** Unique across the whole menu; used by the table planner. */
   id: string;
   /** Shown next to the price when a dish has more than one option. */
   label?: string;
-  /** Full name for the table planner when it differs from the dish name. */
-  name?: string;
   price: number;
 }
 
@@ -35,7 +32,7 @@ export interface MenuSection {
 
 const one = (id: string, price: number): DishOption[] => [{ id, price }];
 
-// Dishes that appear in more than one section share an id, so the planner counts them once.
+// Dishes that appear in more than one section, as on the printed menu.
 const friedGoatCheese: Dish = {
   id: 'fried-goat-cheese',
   name: 'Fried goat cheese',
@@ -74,7 +71,6 @@ export const menu: MenuSection[] = [
           {
             id: 'pan-con-tomate-jamon',
             label: 'con Jamón Ibérico',
-            name: 'Pan con tomate con Jamón Ibérico',
             price: 10,
           },
         ],
@@ -204,8 +200,8 @@ export const menu: MenuSection[] = [
         id: 'tortilla',
         name: 'Tortilla',
         options: [
-          { id: 'tortilla-potato', label: 'potato', name: 'Potato tortilla', price: 9 },
-          { id: 'tortilla-artichoke', label: 'artichoke', name: 'Artichoke tortilla', price: 13 },
+          { id: 'tortilla-potato', label: 'potato', price: 9 },
+          { id: 'tortilla-artichoke', label: 'artichoke', price: 13 },
         ],
         allergens: ['eggs'],
       },
@@ -257,8 +253,8 @@ export const menu: MenuSection[] = [
         id: 'jamon-iberico',
         name: 'Jamón Ibérico',
         options: [
-          { id: 'jamon-cebo', label: 'de cebo', name: 'Jamón Ibérico de cebo', price: 15 },
-          { id: 'jamon-bellota', label: 'de bellota', name: 'Jamón Ibérico de bellota', price: 21 },
+          { id: 'jamon-cebo', label: 'de cebo', price: 15 },
+          { id: 'jamon-bellota', label: 'de bellota', price: 21 },
         ],
         allergens: [],
       },
@@ -278,18 +274,3 @@ export const menu: MenuSection[] = [
     ],
   },
 ];
-
-export interface PlannableItem {
-  id: string;
-  name: string;
-  price: number;
-}
-
-/** Every orderable option on the menu, keyed by option id. */
-export const menuItems: Record<string, PlannableItem> = Object.fromEntries(
-  menu.flatMap((section) =>
-    section.dishes.flatMap((dish) =>
-      dish.options.map((option) => [option.id, { id: option.id, name: option.name ?? dish.name, price: option.price }]),
-    ),
-  ),
-);

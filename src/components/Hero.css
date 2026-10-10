@@ -1,23 +1,57 @@
 .hero {
   position: relative;
-  padding-bottom: clamp(2.5rem, 2rem + 3vw, 4.5rem);
 }
 
-/* Never wider than the photo's own 1360px, and short enough to leave the intro in view */
-.hero__frame {
+.hero__text {
+  display: grid;
+  justify-items: start;
+  gap: 1.4rem;
+  padding: clamp(2.25rem, 1.5rem + 3vw, 4rem) var(--gutter) clamp(2.5rem, 2rem + 3vw, 4rem);
+}
+
+.hero__title {
+  font-size: clamp(2.6rem, 1.55rem + 4.2vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-wrap: balance;
+  max-width: 13em;
+}
+
+.hero__title em {
+  color: var(--link);
+}
+
+.hero__lede {
+  max-width: 31rem;
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.hero__status {
+  color: var(--ink-soft);
+}
+
+/* The photo bleeds off the right edge on wide screens and runs full width on small ones */
+.hero__media {
   position: relative;
-  width: 100%;
-  max-width: 85rem;
-  max-height: max(24rem, calc(100svh - var(--nav-h) - 10rem));
-  margin-inline: auto;
-  aspect-ratio: 2 / 1;
   overflow: hidden;
+  aspect-ratio: 1 / 1;
+  max-height: 80svh;
   background: var(--wall);
 }
 
-.hero__media {
+.hero__layer {
   position: absolute;
-  inset: -12% 0 0;
+  inset: -10% 0 0;
 }
 
 .hero__photo {
@@ -26,83 +60,51 @@
 }
 
 .hero__photo .photo__img {
-  object-position: 48% 60%;
+  object-position: 50% 45%;
 }
 
-.hero__row {
-  display: grid;
-  gap: 2rem;
-  margin-top: clamp(-6.5rem, -5vw, -2rem);
+.hero__caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 0.45rem 0.9rem;
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-.hero__row--plain {
-  margin-top: clamp(2rem, 1rem + 4vw, 4rem);
+@media (min-width: 40rem) {
+  .hero__media {
+    aspect-ratio: 16 / 10;
+  }
 }
 
 @media (min-width: 64rem) {
-  .hero__row {
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    gap: 4rem;
-    align-items: end;
+  .hero--photo {
+    display: grid;
+    grid-template-columns:
+      [full-start] minmax(var(--gutter), 1fr)
+      repeat(12, minmax(0, calc((var(--maxw) - 2 * var(--gutter)) / 12)))
+      minmax(var(--gutter), 1fr) [full-end];
+    min-height: clamp(36rem, calc(100svh - var(--header-h) - 2.4rem), 54rem);
   }
-}
 
-.hero__intro {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  justify-items: start;
-  gap: 1rem;
-  padding: clamp(1.5rem, 1rem + 2.5vw, 2.75rem);
-  background: var(--surface);
-  border-radius: var(--radius-m);
-  box-shadow: var(--shadow-card);
-}
-
-.hero__title {
-  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
-  line-height: 1.05;
-  color: var(--ink);
-  text-wrap: balance;
-}
-
-.hero__where {
-  color: var(--ink-soft);
-}
-
-.hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 0.4rem;
-}
-
-.hero__badge {
-  margin-top: 0.2rem;
-}
-
-.hero__welcome {
-  display: grid;
-  gap: 0.9rem;
-  font-size: var(--step-1);
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
-
-.hero__founders {
-  font-size: var(--step-0);
-  color: var(--ink-faint);
-}
-
-@media (max-width: 48rem) {
-  .hero__frame {
-    aspect-ratio: 4 / 5;
-    max-height: 72svh;
+  .hero--photo .hero__text {
+    grid-column: 2 / 8;
+    align-self: center;
+    padding: 3rem clamp(2rem, 4vw, 4rem) 3.5rem 0;
   }
-}
 
-@media (min-width: 85rem) {
-  .hero__frame {
-    border-radius: 0 0 var(--radius-m) var(--radius-m);
+  .hero--photo .hero__media {
+    grid-column: 8 / full-end;
+    aspect-ratio: auto;
+    max-height: none;
+  }
+
+  .hero:not(.hero--photo) .hero__text {
+    max-width: var(--maxw);
+    margin-inline: auto;
   }
 }

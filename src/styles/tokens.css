@@ -17,37 +17,45 @@
   --chalk-pink: #a58181; /* pink chalk lettering */
   --chalk-red: #71504f; /* red chalk lettering */
 
-  /* Their existing brand colours: logo gold and header burgundy */
+  /* Their existing logo gold, kept for the wordmark on dark grounds */
   --gold: #bd9c68;
-  --burgundy: #432a2e;
 
   /* Roles. Mixes only where a sampled colour alone can't meet AA contrast. */
-  --page: var(--brick);
-  --surface: color-mix(in srgb, var(--marble) 45%, #fff); /* marble-white cards */
+  --paper: color-mix(in srgb, var(--marble) 32%, #fff); /* the page: marble lightened to the room's daylight */
+  --band: var(--brick); /* alternate sections */
   --ink: var(--oak-dark);
   --ink-soft: var(--oak);
   --ink-faint: var(--oak-light);
   --ink-deep: color-mix(in srgb, var(--oak-dark) 70%, #000); /* text on copper */
   --link: color-mix(in srgb, var(--copper) 55%, var(--oak-dark)); /* copper you can read */
-  --line: color-mix(in srgb, var(--oak) 22%, transparent);
-  --line-strong: color-mix(in srgb, var(--oak) 45%, transparent);
+  --line: color-mix(in srgb, var(--oak) 18%, transparent);
+  --line-strong: color-mix(in srgb, var(--oak) 40%, transparent);
+  --on-dark: var(--marble);
+  --on-dark-soft: color-mix(in srgb, var(--marble) 86%, var(--board));
 
-  --font-display: 'IM Fell English', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-wordmark: 'IM Fell English', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
   --font-chalk: 'Amatic SC', 'Arial Narrow', sans-serif;
   --font-body: 'Source Sans 3 Variable', 'Source Sans Pro', ui-sans-serif, system-ui, sans-serif;
 
-  --step--1: clamp(0.85rem, 0.82rem + 0.1vw, 0.9rem);
+  --step--1: clamp(0.84rem, 0.82rem + 0.1vw, 0.9rem);
   --step-0: clamp(1.03rem, 1rem + 0.15vw, 1.1rem);
-  --step-1: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
-  --step-2: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);
-  --step-3: clamp(2rem, 1.6rem + 1.8vw, 3rem);
-  --step-4: clamp(2.6rem, 1.9rem + 3.2vw, 4.4rem);
+  --step-1: clamp(1.15rem, 1.08rem + 0.35vw, 1.35rem);
+  --step-2: clamp(1.4rem, 1.25rem + 0.75vw, 1.85rem);
+  --step-3: clamp(1.8rem, 1.45rem + 1.6vw, 2.75rem);
+  --step-4: clamp(2.5rem, 1.7rem + 3.6vw, 4.75rem);
+  --step-5: clamp(2.7rem, 1.6rem + 4.6vw, 5.6rem);
 
-  --gutter: clamp(1rem, 0.6rem + 2.4vw, 3rem);
-  --maxw: 85rem;
-  --nav-h: 4.5rem;
-  --radius-s: 3px;
-  --radius-m: 6px;
-  --shadow-card: 0 1px 2px rgb(55 27 11 / 0.08), 0 12px 32px -16px rgb(55 27 11 / 0.35);
+  --gutter: clamp(1.25rem, 0.8rem + 2.4vw, 3rem);
+  --maxw: 84rem;
+  --header-h: 4.25rem;
+  --radius: 2px;
+  --shadow-card: 0 1px 2px rgb(55 27 11 / 0.06), 0 18px 40px -24px rgb(55 27 11 / 0.35);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-h: 5rem;
+  }
 }

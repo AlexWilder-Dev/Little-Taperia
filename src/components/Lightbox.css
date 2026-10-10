@@ -4,7 +4,7 @@
   z-index: 100;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background: color-mix(in srgb, var(--page) 97%, transparent);
+  background: color-mix(in srgb, var(--paper) 97%, transparent);
   outline: none;
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -47,7 +47,7 @@
 .lightbox__photo {
   width: min(90vw, calc(76vh * var(--ratio, 1.5)));
   max-height: 76vh;
-  border-radius: var(--radius-s);
+  border-radius: var(--radius);
   box-shadow: var(--shadow-card);
 }
 

@@ -1,76 +1,57 @@
 import { venue } from '../../data/venue';
 import { Icon } from '../ui/Icon';
 import { Reveal } from '../ui/Reveal';
-import { SectionHeading } from '../ui/SectionHeading';
 import { BookingPanel } from './BookingPanel';
 import { PrivateHire } from './PrivateHire';
 import './Book.css';
 
 export function Book() {
   return (
-    <section id="book" className="section book" aria-labelledby="book-title">
+    <section id="book" className="section book band" aria-labelledby="book-title">
       <div className="container">
-        <SectionHeading
-          id="book-title"
-          eyebrow="Reservas"
-          title={
-            <>
-              Book <em>a table</em>
-            </>
-          }
-        >
-          Inside tables are booked online and outdoor tables by email. Any party size is welcome.
-        </SectionHeading>
-
         <div className="book__layout">
-          <Reveal className="book__panel">
-            <BookingPanel />
-          </Reveal>
+          <Reveal className="book__intro">
+            <p className="eyebrow">Reservas</p>
+            <h2 id="book-title" className="book__title display">
+              Book <em>a table</em>
+            </h2>
+            <p className="lede">
+              Inside tables are booked online and outdoor tables by email. Any party size is welcome.
+            </p>
 
-          <Reveal className="book__aside" delay={0.1}>
             <ul role="list" className="book__facts">
               <li>
                 <Icon name="sun" />
-                <div>
-                  <h3>Outdoor tables</h3>
-                  <p>
-                    Booked by email only:{' '}
-                    <a
-                      href={`mailto:${venue.email}?subject=${encodeURIComponent('Outdoor table request')}`}
-                      className="text-link"
-                    >
-                      {venue.email}
-                    </a>
-                  </p>
-                </div>
-              </li>
-              <li>
-                <Icon name="people" />
-                <div>
-                  <h3>Any party size</h3>
-                  <p>From a quiet table for two to the whole gang. Private hire is available on certain days.</p>
-                </div>
+                <p>
+                  <strong>Outdoor tables</strong> are booked by email only:{' '}
+                  <a
+                    href={`mailto:${venue.email}?subject=${encodeURIComponent('Outdoor table request')}`}
+                    className="text-link"
+                  >
+                    {venue.email}
+                  </a>
+                </p>
               </li>
               <li>
                 <Icon name="phone" />
-                <div>
-                  <h3>Rather talk?</h3>
-                  <p>
-                    Call{' '}
-                    <a href={`tel:${venue.phone.tel}`} className="text-link">
-                      {venue.phone.display}
-                    </a>
-                  </p>
-                </div>
+                <p>
+                  <strong>Rather talk?</strong> Call{' '}
+                  <a href={`tel:${venue.phone.tel}`} className="text-link">
+                    {venue.phone.display}
+                  </a>
+                </p>
               </li>
               <li>
                 <Icon name="clock" />
-                <div>
-                  <h3>Good to know</h3>
-                  <p>Last food orders are taken an hour before closing. {venue.serviceNote}</p>
-                </div>
+                <p>
+                  <strong>Good to know:</strong> last food orders are an hour before closing. {venue.serviceNote}
+                </p>
               </li>
             </ul>
+          </Reveal>
+
+          <Reveal className="book__panel" delay={0.08}>
+            <BookingPanel />
           </Reveal>
         </div>
 
@@ -82,10 +63,10 @@ export function Book() {
             </h3>
             <p className="prose">
               The Little Taperia is available for private hire on certain days. Send the date, your numbers and what you
-              have in mind, and we’ll take it from there.
+              have in mind, and the team will take it from there.
             </p>
           </Reveal>
-          <Reveal className="hire__panel" delay={0.1}>
+          <Reveal className="hire__panel" delay={0.08}>
             <PrivateHire />
           </Reveal>
         </div>

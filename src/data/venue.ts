@@ -75,10 +75,10 @@ export const venue = {
     lastSlotLate: 22 * H + 30,
     lateDays: ['fri', 'sat'] as DayKey[],
     slotStep: 30,
-    platesPerPerson: 3,
   },
 
-  serviceCharge: 0.125,
+  /** A rough guide to how many tapas to order each. */
+  platesPerPerson: 3,
 
   founders: [
     {

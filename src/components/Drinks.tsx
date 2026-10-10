@@ -1,14 +1,10 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { useId, useState } from 'react';
-import { drinks, spiritsNote, type Drink, type DrinkGroup } from '../data/drinks';
+import { useState, type ReactNode } from 'react';
+import { drinks, spiritsNote, type Drink, type DrinkGroup, type DrinkTab } from '../data/drinks';
 import { formatPrice } from '../lib/format';
-import { softSpring } from '../lib/motion';
 import { slotPhotos } from '../lib/images';
 import { useMedia } from '../lib/useMedia';
-import { Icon } from './ui/Icon';
 import { Photo } from './ui/Photo';
 import { Reveal } from './ui/Reveal';
-import { SectionHeading } from './ui/SectionHeading';
 import { Tabs, panelId, tabId } from './ui/Tabs';
 import './Drinks.css';
 
@@ -18,7 +14,7 @@ function Prices({ drink, measures }: { drink: Drink; measures?: string[] }) {
     return (
       <span className="drink__prices drink__prices--inline num">
         {drink.prices.map((price, i) => (
-          <span key={i} className="drink__price">
+          <span key={i}>
             {price !== null && formatPrice(price)} <small>{drink.measures![i]}</small>
           </span>
         ))}
@@ -37,11 +33,11 @@ function Prices({ drink, measures }: { drink: Drink; measures?: string[] }) {
     );
   }
   return (
-    <span className={`drink__prices drink__prices--cols drink__prices--${measures.length} num`}>
+    <span className="drink__prices drink__prices--cols num">
       {measures.map((measure, i) => {
         const price = drink.prices[i];
         return (
-          <span key={measure} className="drink__price">
+          <span key={measure}>
             <span className="visually-hidden">{measure} </span>
             {price === null || price === undefined ? (
               <>
@@ -58,19 +54,17 @@ function Prices({ drink, measures }: { drink: Drink; measures?: string[] }) {
   );
 }
 
-function Group({ group, wide }: { group: DrinkGroup; wide: boolean }) {
-  const columns = group.measures && group.measures.length > 1;
+function Group({ group, lead }: { group: DrinkGroup; lead?: ReactNode }) {
+  const columns = group.measures && group.measures.length > 1 ? group.measures : undefined;
   return (
-    <div className={`drink-group ${wide && !columns ? 'drink-group--split' : ''}`}>
-      {(group.title || group.measures) && (
+    <div className="drink-group">
+      {lead}
+      {(group.title || columns) && (
         <div className="drink-group__head">
-          {group.title ? <h4 className="drink-group__title chalk">{group.title}</h4> : <span />}
-          {group.measures && (
-            <span
-              className={`drink-group__measures drink__prices--cols drink__prices--${group.measures.length}`}
-              aria-hidden="true"
-            >
-              {group.measures.map((m) => (
+          {group.title ? <h4 className="drink-group__title">{group.title}</h4> : <span />}
+          {columns && (
+            <span className="drink__prices drink__prices--cols drink-group__measures" aria-hidden="true">
+              {columns.map((m) => (
                 <span key={m}>{m}</span>
               ))}
             </span>
@@ -84,8 +78,7 @@ function Group({ group, wide }: { group: DrinkGroup; wide: boolean }) {
               <span className="drink__name">{drink.name}</span>
               {drink.detail && <span className="drink__detail">{drink.detail}</span>}
             </span>
-            <span className="drink__leader" aria-hidden="true" />
-            <Prices drink={drink} measures={group.measures?.length === 1 ? undefined : group.measures} />
+            <Prices drink={drink} measures={columns} />
           </li>
         ))}
       </ul>
@@ -95,116 +88,93 @@ function Group({ group, wide }: { group: DrinkGroup; wide: boolean }) {
   );
 }
 
-function SpiritsAccordion() {
-  const [open, setOpen] = useState(false);
-  const id = useId();
-  return (
-    <div className={`spirits ${open ? 'is-open' : ''}`}>
-      <h3 className="spirits__heading">
-        <button
-          type="button"
-          className="spirits__toggle"
-          aria-expanded={open}
-          aria-controls={id}
-          onClick={() => setOpen((o) => !o)}
-        >
-          <span className="display">{spiritsNote.title}</span>
-          <Icon name="chevronDown" className="spirits__chevron" />
-        </button>
+function Category({ tab, headingId }: { tab: DrinkTab; headingId?: string }) {
+  // The heading travels with the first group, so a board column never ends on a lone title
+  const head = (
+    <>
+      <h3 id={headingId} className="board__heading">
+        <span className="board__spanish chalk" lang="es">
+          {tab.display}
+        </span>
+        <span className="board__english">{tab.label}</span>
       </h3>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={id}
-            className="spirits__panel"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={softSpring}
-          >
-            <p>{spiritsNote.body}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+      {tab.intro && <p className="board__intro">{tab.intro}</p>}
+    </>
+  );
+  return (
+    <>
+      {tab.groups.map((group, i) => (
+        <Group key={group.title ?? i} group={group} lead={i === 0 ? head : undefined} />
+      ))}
+    </>
   );
 }
 
 export function Drinks() {
   const [tabIdValue, setTab] = useState(drinks[0].id);
-  const desktop = useMedia('(min-width: 64rem)');
+  // Wide screens get the whole board at once; small ones a tab at a time
+  const wide = useMedia('(min-width: 64rem)');
   const tab = drinks.find((d) => d.id === tabIdValue)!;
-  const backBar = slotPhotos.backBar;
+  const shelf = slotPhotos.shelf;
 
   return (
     <section id="drinks" className="section drinks" aria-labelledby="drinks-title">
       <div className="container">
-        <div className={`drinks__head ${backBar.kind === 'photo' ? 'drinks__head--photo' : ''}`}>
-          <SectionHeading
-            id="drinks-title"
-            eyebrow="La bodega"
-            title={
-              <>
-                Something <em>to drink</em>
-              </>
-            }
-          >
-            Sherry and vermouth by the glass, Spanish gin tonics, cava, sangria by the jug and a wine list that wanders
-            from Rías Baixas to Priorat.
-          </SectionHeading>
-          {backBar.kind === 'photo' && (
+        <div className={`drinks__head ${shelf.kind === 'photo' ? 'drinks__head--photo' : ''}`}>
+          <Reveal className="drinks__intro">
+            <p className="eyebrow">La bodega</p>
+            <h2 id="drinks-title" className="drinks__title display">
+              Something <em>to drink</em>
+            </h2>
+            <p className="lede">
+              Sherry and vermouth by the glass, Spanish gin tonics, cava, sangria by the jug and a wine list that
+              wanders from Rías Baixas to Priorat.
+            </p>
+          </Reveal>
+          {shelf.kind === 'photo' && (
             <Reveal className="drinks__photo" delay={0.08}>
               <Photo
-                image={backBar.image}
-                sizes={`(min-width: 64rem) ${Math.min(backBar.image.w, 640)}px, 100vw`}
-                className="frame"
+                image={shelf.image}
+                sizes={`${Math.min(shelf.image.w, 384)}px`}
                 noUpscale
-                style={{ aspectRatio: `${backBar.image.w} / ${backBar.image.h}` }}
+                style={{ aspectRatio: `${shelf.image.w} / ${shelf.image.h}` }}
               />
             </Reveal>
           )}
         </div>
 
-        <Reveal className="board">
-          <div className="board__nav">
+        {wide ? (
+          <div className="board">
+            {drinks.map((category) => (
+              <section key={category.id} className="board__category" aria-labelledby={`board-${category.id}`}>
+                <Category tab={category} headingId={`board-${category.id}`} />
+              </section>
+            ))}
+          </div>
+        ) : (
+          <div className="board board--tabs">
             <Tabs
               items={drinks.map((d) => ({ id: d.id, label: d.label }))}
               value={tab.id}
               onChange={setTab}
               idPrefix="drinks"
               label="Drinks list"
-              orientation={desktop ? 'vertical' : 'horizontal'}
+              className="board__tabs"
             />
-          </div>
-
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={tab.id}
+            <div
               role="tabpanel"
               id={panelId('drinks', tab.id)}
               aria-labelledby={tabId('drinks', tab.id)}
               className="board__panel"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
             >
-              <div className="board__panel-head">
-                <h3 className="board__title chalk" lang="es">
-                  {tab.display}
-                </h3>
-                {tab.intro && <p className="board__intro">{tab.intro}</p>}
-              </div>
-              {tab.groups.map((group, i) => (
-                <Group key={group.title ?? i} group={group} wide={desktop} />
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        </Reveal>
+              <Category tab={tab} />
+            </div>
+          </div>
+        )}
 
-        <Reveal className="drinks__spirits">
-          <SpiritsAccordion />
-        </Reveal>
+        <p className="drinks__spirits">
+          <strong>{spiritsNote.title}.</strong> {spiritsNote.body}
+        </p>
       </div>
     </section>
   );

@@ -1,30 +1,78 @@
 .book__layout {
   display: grid;
-  gap: 2rem;
-  margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  gap: 2.5rem;
 }
 
 @media (min-width: 64rem) {
   .book__layout {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-    gap: 3.5rem;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(3rem, 6vw, 6rem);
     align-items: start;
   }
+
+  .book__intro {
+    position: sticky;
+    top: calc(var(--header-h) + 2.5rem);
+  }
+}
+
+.book__intro {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.book__title {
+  font-size: var(--step-5);
+  color: var(--ink);
+}
+
+.book__title em {
+  color: var(--link);
+}
+
+.book__facts {
+  display: grid;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.book__facts li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--line-strong);
+  color: var(--ink-soft);
+}
+
+.book__facts svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2rem;
+  color: var(--ink);
+}
+
+.book__facts strong {
+  color: var(--ink);
+}
+
+.book__facts p {
+  overflow-wrap: anywhere;
 }
 
 /* ---------- Booking panel ---------- */
 
 .booking {
   position: relative;
-  border-radius: var(--radius-m);
-  background: var(--surface);
+  background: var(--paper);
   box-shadow: var(--shadow-card);
 }
 
 .booking__form {
   display: grid;
   gap: 1.75rem;
-  padding: clamp(1.25rem, 1rem + 2vw, 2.25rem);
+  padding: clamp(1.25rem, 0.8rem + 2.5vw, 2.5rem);
 }
 
 .booking__row {
@@ -33,6 +81,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .booking__block {
@@ -54,10 +104,11 @@
 
 .booking__value {
   font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-size: 1.2rem;
   letter-spacing: 0;
   text-transform: none;
-  font-weight: 400;
+  font-weight: 420;
   color: var(--ink);
 }
 
@@ -94,7 +145,6 @@
 .booking__error {
   margin-top: -0.5rem;
   padding: 0.7rem 0.9rem;
-  border-radius: var(--radius-s);
   border: 1px solid var(--chalk-red);
   background: color-mix(in srgb, var(--chalk-pink) 18%, transparent);
   color: var(--ink);
@@ -137,13 +187,13 @@
 }
 
 .segmented .radio-option[aria-checked='true'] {
-  background: var(--oak-dark);
-  color: var(--surface);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .date-strip {
   display: flex;
-  gap: 0.45rem;
+  gap: 0.4rem;
   overflow-x: auto;
   scroll-snap-type: x proximity;
   padding: 0.3rem;
@@ -157,9 +207,8 @@
   display: grid;
   justify-items: center;
   gap: 0.05rem;
-  width: 4.4rem;
+  width: 4.3rem;
   padding: 0.6rem 0.25rem 0.55rem;
-  border-radius: var(--radius-m);
   border: 1px solid var(--line-strong);
   scroll-snap-align: start;
   color: var(--ink-soft);
@@ -183,7 +232,6 @@
 }
 
 .date-strip__day {
-  font-family: var(--font-body);
   font-size: 1.5rem;
   font-weight: 650;
   line-height: 1.15;
@@ -191,13 +239,13 @@
 }
 
 .date-strip .radio-option[aria-checked='true'] {
-  background: var(--copper);
-  border-color: var(--copper);
-  color: var(--ink-deep);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
 }
 
 .date-strip .radio-option[aria-checked='true'] .date-strip__day {
-  color: var(--ink-deep);
+  color: var(--paper);
 }
 
 .time-grid {
@@ -208,7 +256,6 @@
 
 .time-grid .radio-option {
   padding: 0.55rem 0.25rem;
-  border-radius: var(--radius-s);
   border: 1px solid var(--line-strong);
   font-weight: 600;
   color: var(--ink);
@@ -230,13 +277,13 @@
 }
 
 .time-grid .radio-option[aria-checked='true'] {
-  background: var(--copper);
-  border-color: var(--copper);
-  color: var(--ink-deep);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
 }
 
 .time-grid .radio-option[aria-checked='true']::after {
-  background: var(--ink-deep);
+  background: var(--copper);
 }
 
 /* ---------- Preview result (shared with private hire) ---------- */
@@ -245,8 +292,7 @@
   display: grid;
   gap: 1rem;
   padding: clamp(1.5rem, 1rem + 2.5vw, 2.5rem);
-  border-radius: var(--radius-m);
-  background: var(--surface);
+  background: var(--paper);
   color: var(--ink);
   outline: none;
 }
@@ -268,8 +314,8 @@
   gap: 0.45rem;
   padding: 0.35rem 0.75rem 0.35rem 0.55rem;
   border-radius: 999px;
-  background: var(--burgundy);
-  color: var(--brick) !important;
+  background: var(--sage);
+  color: var(--marble) !important;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -282,8 +328,7 @@
 }
 
 .booking__result-title {
-  font-size: clamp(2rem, 1.5rem + 2vw, 2.8rem);
-  line-height: 1.05;
+  font-size: var(--step-3);
   color: var(--ink);
 }
 
@@ -319,82 +364,47 @@
   height: 1rem;
 }
 
-/* ---------- Aside ---------- */
-
-.book__facts li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1rem;
-  padding-block: 1.2rem;
-  border-bottom: 1px solid var(--line-strong);
-}
-
-.book__facts li:first-child {
-  border-top: 1px solid var(--line-strong);
-}
-
-.book__facts svg {
-  width: 1.35rem;
-  height: 1.35rem;
-  color: var(--link);
-  margin-top: 0.2rem;
-}
-
-.book__facts h3 {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 400;
-}
-
-.book__facts p {
-  margin-top: 0.25rem;
-  color: var(--ink-soft);
-  overflow-wrap: anywhere;
-}
-
 /* ---------- Private hire ---------- */
 
 .hire {
   display: grid;
   gap: 2rem;
-  margin-top: clamp(4rem, 3rem + 4vw, 6rem);
-  padding: clamp(1.5rem, 1rem + 3vw, 3.25rem);
-  border-radius: var(--radius-m);
-  background: var(--burgundy);
-  color: var(--brick);
-  scroll-margin-top: calc(var(--nav-h) + 1rem);
+  margin-top: clamp(4rem, 3rem + 4vw, 7rem);
+  padding-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  border-top: 1px solid var(--ink);
 }
 
 @media (min-width: 64rem) {
   .hire {
-    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-    gap: 4rem;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(3rem, 6vw, 6rem);
   }
 }
 
-.hire .eyebrow {
-  color: var(--gold);
+.hire__intro {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
 }
 
 .hire__title {
-  margin-top: 0.8rem;
-  font-size: var(--step-3);
-  line-height: 1.05;
-  color: var(--surface);
+  font-size: var(--step-4);
+  color: var(--ink);
   text-wrap: balance;
 }
 
 .hire__title em {
-  color: var(--gold);
+  color: var(--link);
 }
 
-.hire__intro .prose {
-  margin-top: 1rem;
-  color: var(--brick);
+.hire__panel {
+  padding: clamp(1.25rem, 0.8rem + 2.5vw, 2.5rem);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
 }
 
-.hire :focus-visible {
-  outline-color: var(--gold);
+.hire__panel .booking__result {
+  padding: 0;
 }
 
 .hire__form {
@@ -404,7 +414,7 @@
 
 .hire__grid {
   display: grid;
-  gap: 1rem 1.25rem;
+  gap: 1.1rem 1.25rem;
 }
 
 @media (min-width: 40rem) {
@@ -426,7 +436,7 @@
 .field label {
   font-size: 0.9rem;
   font-weight: 650;
-  color: var(--brick);
+  color: var(--ink);
 }
 
 .field input,
@@ -434,9 +444,9 @@
   width: 100%;
   min-height: 3rem;
   padding: 0.65rem 0.85rem;
-  border-radius: var(--radius-s);
-  border: 1px solid transparent;
-  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: #fff;
   color: var(--ink);
 }
 
@@ -447,26 +457,26 @@
 
 .field input:focus,
 .field textarea:focus {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--link);
   outline-offset: 1px;
 }
 
 .field.has-error input,
 .field.has-error textarea {
-  border-color: var(--chalk-pink);
-  box-shadow: 0 0 0 2px var(--chalk-pink);
+  border-color: var(--chalk-red);
+  box-shadow: 0 0 0 1px var(--chalk-red);
 }
 
 .field__error {
   font-size: 0.92rem;
   font-weight: 600;
-  color: var(--surface);
+  color: var(--chalk-red);
 }
 
 .form-errors {
   padding: 1rem 1.2rem;
-  border-radius: var(--radius-m);
-  background: var(--surface);
+  border: 1px solid var(--chalk-red);
+  background: color-mix(in srgb, var(--chalk-pink) 14%, transparent);
   color: var(--ink);
 }
 
@@ -484,5 +494,4 @@
 
 .hire__submit .booking__fine {
   text-align: left;
-  color: var(--brick);
 }

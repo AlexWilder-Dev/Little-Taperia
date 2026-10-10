@@ -1,31 +1,4 @@
-/* Shared section heading */
-
-.section-heading {
-  display: grid;
-  gap: 0.9rem;
-  justify-items: start;
-}
-
-.section-heading--center {
-  justify-items: center;
-  text-align: center;
-}
-
-.section-heading__title {
-  font-size: var(--step-4);
-  color: var(--ink);
-  text-wrap: balance;
-}
-
-.section-heading__title em {
-  font-style: italic;
-  color: var(--link);
-}
-
-.section-heading__intro {
-  margin-top: 0.2rem;
-}
-
+/* Anchored sections land below the sticky masthead */
 [id] {
-  scroll-margin-top: calc(var(--nav-h) + 0.75rem);
+  scroll-margin-top: calc(var(--header-h) + 0.75rem);
 }

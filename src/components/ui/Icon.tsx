@@ -7,7 +7,6 @@ const paths = {
   arrowRight: <path d="M5 12h14M13 6l6 6-6 6" />,
   arrowLeft: <path d="M19 12H5M11 6l-6 6 6 6" />,
   arrowUpRight: <path d="M7 17L17 7M8 7h9v9" />,
-  chevronDown: <path d="M6 9l6 6 6-6" />,
   phone: <path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2" />,
   mail: (
     <>
@@ -36,12 +35,6 @@ const paths = {
       <path d="M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5" />
     </>
   ),
-  calendar: (
-    <>
-      <rect x="3.5" y="5" width="17" height="15" rx="2" />
-      <path d="M3.5 10h17M8 3v4M16 3v4" />
-    </>
-  ),
   clock: (
     <>
       <circle cx="12" cy="12" r="8.5" />
@@ -54,12 +47,6 @@ const paths = {
       <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" />
       <circle cx="17" cy="9" r="2.4" />
       <path d="M16 14.2c2.8.3 5 2.6 5 5.8" />
-    </>
-  ),
-  plate: (
-    <>
-      <circle cx="12" cy="12" r="8.5" />
-      <circle cx="12" cy="12" r="4.5" />
     </>
   ),
   check: <path d="M5 12.5l4.5 4.5L19 7.5" />,

@@ -1,0 +1,76 @@
+.welcome__intro {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.welcome__statement {
+  max-width: 24em;
+  font-size: var(--step-3);
+  font-weight: 340;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.rooms {
+  display: grid;
+  gap: 3rem;
+  margin-top: clamp(3rem, 2rem + 4vw, 5.5rem);
+}
+
+.room {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.room__photo {
+  width: 100%;
+}
+
+.room__text {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+}
+
+.room__name {
+  font-size: var(--step-3);
+  font-style: italic;
+  font-weight: 340;
+  color: var(--ink);
+}
+
+.room__desc {
+  max-width: 30rem;
+  color: var(--ink-soft);
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+.room__facts {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+@media (min-width: 56rem) {
+  .rooms {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2.5rem, 5vw, 6rem);
+    align-items: end;
+  }
+
+  .rooms:not(.rooms--photo) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .room--back {
+    padding-bottom: 0.25rem;
+  }
+}

@@ -1,48 +1,61 @@
+/* Sage, from the shuttered mirror frame behind the bar */
+.visit {
+  background: var(--sage);
+  color: var(--marble);
+}
+
+.visit :focus-visible {
+  outline-color: var(--marble);
+}
+
 .visit__layout {
   display: grid;
-  gap: 3rem;
-  margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  gap: 3.5rem;
 }
 
 @media (min-width: 64rem) {
   .visit__layout {
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    gap: 4rem;
-    align-items: center;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
   }
+}
+
+.visit .visit__title {
+  color: var(--marble);
 }
 
 .visit__address {
   display: grid;
-  gap: 0.3rem;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
   font-style: normal;
 }
 
 .visit__street {
-  font-size: var(--step-4);
+  font-size: var(--step-5);
   line-height: 1;
-  color: var(--ink);
+  color: var(--marble);
   text-wrap: balance;
 }
 
 .visit__city {
   font-size: var(--step-2);
   font-weight: 500;
-  color: var(--ink-soft);
+  color: var(--brick);
 }
 
 .visit__note {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-top: 1.4rem;
-  color: var(--ink-soft);
+  margin-top: 1.5rem;
+  color: var(--brick);
 }
 
 .visit__note svg {
   width: 1.2rem;
   height: 1.2rem;
-  color: var(--link);
   flex: none;
 }
 
@@ -50,20 +63,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
-  margin-top: 1.8rem;
+  margin-top: 2rem;
 }
 
 .visit__email {
   max-width: 100%;
   white-space: normal;
   overflow-wrap: anywhere;
-}
-
-.visit__hours {
-  padding: clamp(1.4rem, 1rem + 2vw, 2.25rem);
-  border-radius: var(--radius-m);
-  background: var(--surface);
-  box-shadow: var(--shadow-card);
 }
 
 .visit__hours-head {
@@ -76,8 +82,13 @@
 }
 
 .visit__hours-head h3 {
-  font-size: 2rem;
-  color: var(--ink);
+  font-size: var(--step-3);
+  color: var(--marble);
+}
+
+.visit .hours-badge {
+  --dot: var(--marble);
+  color: var(--brick);
 }
 
 .hours-table {
@@ -92,17 +103,17 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-align: left;
-  color: var(--ink-faint);
+  color: var(--brick);
 }
 
 .hours-table th,
 .hours-table td {
-  padding: 0.65rem 0.5rem;
+  padding: 0.7rem 0.5rem;
   text-align: left;
 }
 
 .hours-table tbody tr {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid color-mix(in srgb, var(--marble) 30%, transparent);
 }
 
 .hours-table tbody th {
@@ -115,23 +126,31 @@
 }
 
 .hours-table td:last-child {
-  color: var(--ink-soft);
+  color: var(--brick);
+}
+
+.hours-table td {
+  white-space: nowrap;
 }
 
 .hours-table tr.is-today {
-  background: color-mix(in srgb, var(--copper) 22%, transparent);
+  background: color-mix(in srgb, var(--sage) 70%, var(--oak-dark));
+}
+
+.hours-table tr.is-today th {
+  box-shadow: inset 3px 0 0 var(--marble);
 }
 
 .hours-table tr.is-today td:last-child {
-  color: var(--ink);
+  color: var(--marble);
 }
 
 .hours-table__today {
   margin-left: 0.55rem;
   padding: 0.1rem 0.45rem;
   border-radius: 999px;
-  background: var(--oak-dark);
-  color: var(--surface);
+  background: var(--marble);
+  color: var(--sage);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -142,11 +161,7 @@
 .visit__fine {
   margin-top: 1rem;
   font-size: 0.9rem;
-  color: var(--ink-faint);
-}
-
-.hours-table td {
-  white-space: nowrap;
+  color: var(--brick);
 }
 
 @media (max-width: 30rem) {

@@ -7,9 +7,7 @@
   display: flex;
   gap: 0.5rem;
   padding: 0.4rem;
-  border-radius: var(--radius-m);
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
+  background: var(--ink);
   box-shadow: var(--shadow-card);
 }
 
@@ -19,31 +17,22 @@
   }
 }
 
-.dock__plan {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  min-height: 2.9rem;
-  padding: 0 0.8rem 0 0.25rem;
-  color: var(--ink);
-  font-weight: 650;
-  flex: 1;
-}
-
-.dock__plan-text .num {
-  margin-left: 0.3rem;
-  font-weight: 500;
-  color: var(--ink-soft);
-}
-
-.dock__count {
+.dock__call {
   display: grid;
   place-items: center;
-  width: 2.3rem;
-  height: 2.3rem;
-  border-radius: 50%;
-  background: var(--copper);
-  color: var(--ink-deep);
+  width: 3rem;
+  flex: none;
+  color: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+}
+
+.dock__call svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.dock__call:focus-visible {
+  outline-color: var(--copper);
 }
 
 .dock__book {

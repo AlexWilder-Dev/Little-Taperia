@@ -28,12 +28,12 @@ The workflow passes the Pages URL to the build as `SITE_URL`, so the Open Graph 
 
 ## Design
 
-The look is taken from the venue's opening photo of the front-room bar (`IMG_0003par.jpg`): white marble on reclaimed timber, copper pendants, sage shutters, white brick and the chalkboard.
+A light, editorial layout built around the venue's own photos: big type, generous space and real photography.
 
-- **Palette:** every colour in `src/styles/tokens.css` is sampled from that photo by `npm run palette` (`scripts/palette.ts`), alongside their existing brand gold (#BD9C68) and burgundy (#432A2E). A few roles mix two sampled colours where a raw sample can't meet AA contrast as text.
-- **Type:** the wordmark is set in IM Fell English Italic, the closest match to their gold logo. Headings use IM Fell English, body text Source Sans 3, and Amatic SC (after the chalkboard lettering) appears only on the drinks board.
-- **Materials:** marble-white cards, the drinks list as a chalkboard panel, copper buttons and links, and real crops of the photo (the back bar, the front of the bar, a strip of its timber planks).
-- **Motion:** a gentle parallax on the opening photo, as on their current site, and soft reveals as sections scroll in. Nothing else moves on its own.
+- **Palette:** every colour in `src/styles/tokens.css` is sampled from the opening photo of the front-room bar (`IMG_0003par.jpg`) by `npm run palette` (`scripts/palette.ts`): marble for the page, white brick for alternate bands, oak for text, copper for buttons and links, the chalkboard for the drinks list and the sage shutters for the Find us band. Their logo gold (#BD9C68) is kept for the wordmark on dark grounds. A few roles mix two sampled colours where a raw sample can't meet AA contrast as text.
+- **Type:** the wordmark is set in IM Fell English Italic, the closest match to their gold logo. Headings use Fraunces, body text Source Sans 3, and Amatic SC (after the chalkboard lettering) appears only for the category names on the drinks board.
+- **Layout:** a split opening screen (type on the left, the bar on the right), the press quotes side by side, the menu laid out like a printed carta with a sticky section index, and the whole drinks board laid out at once on wide screens (a tab at a time on phones).
+- **Motion:** a gentle parallax on the opening photo and soft reveals as sections scroll in. Nothing else moves on its own.
 
 ## Photos
 
@@ -82,9 +82,9 @@ Prices are plain numbers, as on the printed menu. Opening hours drive the live o
 
 ## What's mocked
 
+- **Menu:** a menu to read, not a shop: no basket or ordering. The free-from filter strikes through dishes that contain the chosen allergens.
 - **Booking panel:** party size, date and time are real UI, but submitting shows a preview card that links to the venue's existing ResDiary page and phone number. Nothing is booked.
 - **Outdoor tables and private hire:** front-end validation only. The preview card offers a pre-filled email draft that the visitor sends themselves.
-- **Plan your table:** a planning tool with a plate count, subtotal and 12.5% discretionary service line. It saves to the browser's local storage. There's no checkout.
 
 ## Stack
 

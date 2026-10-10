@@ -1,7 +1,5 @@
-import type { CSSProperties } from 'react';
 import { venue } from '../data/venue';
 import { groupedHours } from '../lib/hours';
-import { photoUrl, slotPhotos } from '../lib/images';
 import { Icon } from './ui/Icon';
 import { Wordmark } from './ui/Wordmark';
 import './Footer.css';
@@ -9,27 +7,14 @@ import './Footer.css';
 const socialIcon = { Instagram: 'instagram', Facebook: 'facebook' } as const;
 
 export function Footer() {
-  const timber = slotPhotos.timber;
   return (
     <footer className="footer">
-      {timber.kind === 'photo' && (
-        // A strip of the bar's own reclaimed timber front, shown at its real size
-        <div
-          className="footer__timber"
-          aria-hidden="true"
-          style={
-            {
-              // Set inline so the relative URLs resolve against the page, not the stylesheet
-              backgroundImage: `image-set(url(${photoUrl(timber.image.id, timber.image.w, 'avif')}) type('image/avif'), url(${photoUrl(timber.image.id, timber.image.w, 'webp')}) type('image/webp'))`,
-              '--timber-w': `${timber.image.w}px`,
-              '--timber-h': `${timber.image.h}px`,
-            } as CSSProperties
-          }
-        />
-      )}
       <div className="container">
         <div className="footer__top">
-          <Wordmark size="large" />
+          <div className="footer__brand">
+            <Wordmark size="large" tone="gold" as="p" />
+            <p className="footer__tagline">{venue.tagline}</p>
+          </div>
           <a href="#book" className="btn btn--primary">
             Book a table <Icon name="arrowRight" />
           </a>

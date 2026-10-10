@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T13:37:04.682Z",
+  "generatedAt": "2026-10-10T14:34:20.465Z",
   "photos": {
     "hero": {
       "id": "hero",
@@ -38,40 +38,22 @@
       ],
       "order": 1000
     },
-    "crop-back-bar": {
-      "id": "crop-back-bar",
+    "crop-shelf": {
+      "id": "crop-shelf",
       "origin": "site",
-      "w": 915,
-      "h": 390,
+      "w": 326,
+      "h": 502,
       "widths": [
-        480,
-        768,
-        915
+        326
       ],
-      "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAABQAwCdASoYAAoAPu1Ct1apoqakGAEwHYljALDsDWJqaNJ4AAD9OE757PP0JYC4g8sGyd6RebjOfUhTfsgM8hGwscAAAA==",
-      "color": "#a88878",
-      "alt": "The back bar: rustic shelves of wine and spirits either side of the shuttered mirror, under the longhorn horns",
+      "lqip": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAACwBQCdASoYACUAPu1gqU2ppSOiMBVdUTAdiWUAwcwFDV8QYqIzhuc+u664lcx90KsvqD+R+JAAk5E/emARnM5s0SQnANtkRho1Cb6P4JbaxSdjZ7aVjnC5MgzhFXWKSAChrSX28yi+B03o2R2UX+ScZRwWoJKkWM5pqvUqqAMI6AAA",
+      "color": "#987868",
+      "alt": "Shelves of gin, wine and glasses behind the bar, under cut-glass pendant lamps",
       "tags": [
         "bar",
         "drink"
       ],
       "order": 1001
-    },
-    "crop-timber": {
-      "id": "crop-timber",
-      "origin": "site",
-      "w": 911,
-      "h": 140,
-      "widths": [
-        480,
-        768,
-        911
-      ],
-      "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAwCdASoYAAQAPu1kqU2ppaQiMAgBMB2JQBOmUI7gBvKRo8FIAAD+6uwFeu6XAOHLxiE2Uhb29RgG8GCREAAA",
-      "color": "#784828",
-      "alt": "",
-      "tags": [],
-      "order": 1002
     }
   },
   "brand": {}
