@@ -15,7 +15,7 @@
 
 @media (min-width: 64rem) {
   .press__inner {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 4rem;
   }
 }
@@ -71,11 +71,12 @@
 }
 
 .seal--image {
+  display: block;
   border: 0;
   background: none;
   padding: 0;
   width: auto;
-  height: 8.25rem;
+  height: clamp(6.4rem, 27vw, 8.25rem);
   aspect-ratio: auto;
 }
 
@@ -87,6 +88,18 @@
   height: 100%;
   width: auto;
   filter: drop-shadow(0 10px 25px rgb(0 0 0 / 0.5));
+}
+
+/* Badges without transparency sit like a sticker on the window */
+.seal--opaque img {
+  height: 88%;
+  margin-top: 6%;
+  border-radius: 6px;
+  transform: rotate(-4deg);
+  box-shadow:
+    0 0 0 3px var(--cream-100),
+    0 14px 30px -8px rgb(0 0 0 / 0.7);
+  filter: none;
 }
 
 .press__quotes {

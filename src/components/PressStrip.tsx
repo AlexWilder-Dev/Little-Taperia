@@ -22,7 +22,7 @@ function AwardSeal({ award }: { award: (typeof awards)[number] }) {
   const badge = award.badge ? getBrand(award.badge) : undefined;
   if (badge) {
     return (
-      <li className="seal seal--image">
+      <li className={`seal seal--image ${badge.maskable ? '' : 'seal--opaque'}`}>
         <img
           src={brandUrl(badge.file)}
           width={badge.w}
@@ -71,7 +71,7 @@ export function PressStrip() {
               <AwardSeal key={award.id} award={award} />
             ))}
             {extra.map((b) => (
-              <li key={b.id} className="seal seal--image">
+              <li key={b.id} className={`seal seal--image ${b.entry!.maskable ? '' : 'seal--opaque'}`}>
                 <img src={brandUrl(b.entry!.file)} width={b.entry!.w} height={b.entry!.h} alt={b.alt} loading="lazy" />
               </li>
             ))}
