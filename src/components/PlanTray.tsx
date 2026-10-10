@@ -75,7 +75,7 @@ export function PlanTray() {
                 onClick={close}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                exit={{ opacity: 0, transition: { duration: 0.3 } }}
               />
               <motion.div
                 ref={panelRef}
@@ -86,7 +86,7 @@ export function PlanTray() {
                 tabIndex={-1}
                 initial={{ y: '100%' }}
                 animate={{ y: 0 }}
-                exit={{ y: '100%' }}
+                exit={{ y: '100%', transition: { duration: 0.32, ease: [0.4, 0, 1, 1] } }}
                 transition={softSpring}
                 drag={desktop || reduced ? false : 'y'}
                 dragControls={dragControls}

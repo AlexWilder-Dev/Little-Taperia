@@ -235,7 +235,7 @@
 
 .menu__photo-img {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: var(--ratio, 4 / 5);
   border-radius: var(--radius-l);
   overflow: hidden;
   box-shadow: var(--shadow-deep);

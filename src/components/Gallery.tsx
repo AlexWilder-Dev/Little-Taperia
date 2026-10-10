@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { venue } from '../data/venue';
 import { galleryItems, type GalleryItem } from '../lib/images';
 import { softSpring } from '../lib/motion';
@@ -11,39 +11,25 @@ import { SectionHeading } from './ui/SectionHeading';
 import { Lightbox } from './Lightbox';
 import './Gallery.css';
 
-type Shape = 'feature' | 'landscape' | 'portrait' | 'square' | 'tall';
+/** Placeholder frames cycle through these ratios so the masonry still has rhythm. */
+const placeholderRatios = [4 / 5, 3 / 2, 1, 3 / 2, 4 / 5, 1, 16 / 10];
 
-function shapeOf(item: GalleryItem, index: number): Shape {
-  if (item.kind === 'placeholder') {
-    const pattern: Shape[] = [
-      'feature',
-      'portrait',
-      'square',
-      'landscape',
-      'portrait',
-      'landscape',
-      'tall',
-      'square',
-      'landscape',
-    ];
-    return pattern[index % pattern.length];
-  }
-  const ratio = item.image.w / item.image.h;
-  if (item.feature) return ratio >= 1 ? 'feature' : 'tall';
-  if (ratio >= 1.25) return 'landscape';
-  if (ratio <= 0.85) return 'portrait';
-  return 'square';
+/** Every few photos get a portrait crop for rhythm, when they're tall enough to fill it sharply. */
+const PORTRAIT = 4 / 5;
+const PORTRAIT_EVERY = 5;
+/** Widest a masonry column gets, in CSS pixels; a crop must not need upscaling to fill it. */
+const COLUMN_PX = 420;
+
+function ratioOf(item: GalleryItem, index: number): number {
+  if (item.kind === 'placeholder') return placeholderRatios[index % placeholderRatios.length];
+  const natural = item.image.w / item.image.h;
+  const crop = index % PORTRAIT_EVERY === 1 && natural > 1 && item.image.h >= COLUMN_PX / PORTRAIT;
+  return crop ? PORTRAIT : natural;
 }
 
-const sizesFor: Record<Shape, string> = {
-  feature: '(min-width: 48rem) 66vw, 100vw',
-  tall: '(min-width: 48rem) 33vw, 50vw',
-  landscape: '(min-width: 48rem) 33vw, 100vw',
-  portrait: '(min-width: 48rem) 25vw, 50vw',
-  square: '(min-width: 48rem) 25vw, 50vw',
-};
-
 const items = galleryItems();
+// A photo large enough to run across the full width leads the gallery
+const leadIndex = items.findIndex((item) => item.kind === 'photo' && item.feature);
 const photos = items.flatMap((item) => (item.kind === 'photo' ? [item.image] : []));
 
 export function Gallery() {
@@ -72,15 +58,17 @@ export function Gallery() {
 
         <ul role="list" className="gallery__grid">
           {items.map((item, index) => {
-            const shape = shapeOf(item, index);
+            const lead = index === leadIndex;
+            const ratio = lead && item.kind === 'photo' ? item.image.w / item.image.h : ratioOf(item, index);
             return (
               <motion.li
                 key={item.kind === 'photo' ? item.image.id : item.id}
-                className={`tile tile--${shape}`}
+                className={`tile ${lead ? 'tile--lead' : ''}`}
+                style={{ '--ratio': ratio } as CSSProperties}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '0px 0px -8% 0px' }}
-                transition={{ ...softSpring, delay: (index % 4) * 0.06 }}
+                transition={{ ...softSpring, delay: (index % 3) * 0.06 }}
               >
                 {item.kind === 'photo' ? (
                   <button
@@ -89,18 +77,18 @@ export function Gallery() {
                     onClick={() => setOpen(photos.indexOf(item.image))}
                     aria-label={`Open photo: ${item.image.alt}`}
                   >
-                    <Parallax amount={5}>
-                      <Photo image={item.image} sizes={sizesFor[shape]} className="tile__photo" alt="" />
+                    <Parallax amount={lead ? 6 : 4}>
+                      <Photo
+                        image={item.image}
+                        sizes={lead ? '(min-width: 84rem) 80rem, 94vw' : '(min-width: 64rem) 420px, 50vw'}
+                        className="tile__photo"
+                        alt=""
+                      />
                     </Parallax>
                     <span className="tile__caption">{item.image.alt}</span>
                   </button>
                 ) : (
-                  <PhotoPlaceholder
-                    label={item.alt}
-                    files={[item.file]}
-                    className="tile__placeholder"
-                    compact={shape !== 'feature'}
-                  />
+                  <PhotoPlaceholder label={item.alt} files={[item.file]} className="tile__placeholder" compact />
                 )}
               </motion.li>
             );

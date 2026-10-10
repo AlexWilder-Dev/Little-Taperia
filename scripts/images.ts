@@ -252,12 +252,16 @@ async function main() {
     }
   }
 
+  console.log('\nProcessing logo and badges…');
   for (const source of brandSources) {
     const file = path.join(SRC_DIR, source.file);
     if (!existsSync(file)) continue;
     try {
       const entry = await processBrand(file, source.id);
       manifest.brand[source.id] = entry;
+      console.log(
+        `  ${source.id.padEnd(22)} ${String(entry.w).padStart(5)}×${String(entry.h).padEnd(5)} ${entry.maskable ? 'transparent' : 'opaque'}`,
+      );
       if (source.id === 'logo' && !entry.maskable) {
         problems.push('logo: no transparent background, so the typographic wordmark is used instead');
       }

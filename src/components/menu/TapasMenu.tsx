@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { allergens, menu, type Allergen } from '../../data/menu';
 import { venue } from '../../data/venue';
 import { slotPhotos } from '../../lib/images';
@@ -28,7 +28,10 @@ function SectionPhoto() {
   if (slot.kind === 'photo') {
     return (
       <figure className="menu__photo">
-        <div className="menu__photo-img">
+        <div
+          className="menu__photo-img"
+          style={{ '--ratio': Math.min(1.6, Math.max(0.8, slot.image.w / slot.image.h)) } as CSSProperties}
+        >
           <Parallax>
             <Photo image={slot.image} sizes="(min-width: 64rem) 28vw, 90vw" />
           </Parallax>
